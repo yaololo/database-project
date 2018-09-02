@@ -10,7 +10,6 @@ const {
   deleteCurrentUser
 } = require("../../controllers/user_controller");
 
-const jwt = require("../../middlewares/jwt_middleware");
 
 router.post("/users/signup", handleAsyncError(registerNewUser));
 

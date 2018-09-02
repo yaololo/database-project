@@ -6,8 +6,7 @@
   "scripts": {
     "build": "concurrently \"cd client && yarn build\"",
     "install": "concurrently \"cd client&&yarn\" \"cd server&&yarn\"",
-    "start":
-      "concurrently --kill-others-on-fail \"yarn start:dev:server\" \"yarn start:client\"",
+    "start": "concurrently --kill-others-on-fail \"yarn start:dev:server\" \"yarn start:client\"",
     "start:prod:server": "cd server&&yarn start",
     "start:client": "cd client&&yarn start",
     "start:dev:server": "cd server&&yarn dev",
@@ -19,7 +18,6 @@
     "client/node_modules",
     "server/node_modules"
   ],
-  "license": "MIT",
   "devDependencies": {
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.4",
@@ -27,5 +25,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.0.2",
     "prettier": "^1.11.1"
+  },
+  "dependencies": {
+    "mysql": "^2.16.0"
   }
 }
