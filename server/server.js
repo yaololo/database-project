@@ -1,24 +1,33 @@
 const app = require("./app");
+var mysql = require('mysql');
+var connection = mysql.createPool({
+  connectionLimit: 50,
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'school_project'
+});
+
+connection.connect(function (error){
+  if(error){
+    console.error(error);
+  } else{
+    console.log('Database connected');
+  }
+})
 
 const server = app.listen(3001, function() {
   console.log(`Server Listening on port ${server.address().port}...`);
 });
 
-
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'dbuser',
-  password : 's3kreee7',
-  database : 'my_db'
+connection.query('SELECT * FROM testing', function (error, results, fields) {
+  if (error) throw error;
+  else console.log(results);
 });
 
-connection.connect()
 
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-  if (err) throw err
+// connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+//   if (err) throw err
 
-  console.log('The solution is: ', rows[0].solution)
-})
-
-connection.end()
+//   console.log('The solution is: ', rows[0].solution)
+// })
