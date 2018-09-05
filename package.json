@@ -27,6 +27,7 @@
     "prettier": "^1.11.1"
   },
   "dependencies": {
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "react-bootstrap": "^0.32.3"
   }
 }
