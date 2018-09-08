@@ -4,7 +4,7 @@
   "description": "A starter project for running React and Express together",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon app.js",
     "dev": "NODE_ENV=local nodemon server.js"
   },
   "repository": {},
