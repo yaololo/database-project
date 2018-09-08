@@ -16,8 +16,7 @@
     "errorhandler": "^1.5.0",
     "express": "^4.16.2",
     "express-async-wrap": "^1.0.0",
-    "mysql": "mysqljs/mysql",
-    "nodemon": "^1.18.4"
+    "mysql": "mysqljs/mysql"
   },
   "devDependencies": {
     "jest": "^22.1.4",
