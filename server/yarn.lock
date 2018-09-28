@@ -96,6 +96,16 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+a-csv@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/a-csv/-/a-csv-2.0.0.tgz#b97e10b11c89d6e6ba2d158864aaffb055c1e5ae"
+  dependencies:
+    bug-killer "^1.0.0"
+    clp "^1.2.0"
+    fs-plus "^2.8.1"
+    iconv-lite "^0.4.8"
+    is-there "^2.0.0"
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
@@ -151,6 +161,14 @@ ansi-align@^2.0.0:
 ansi-escapes@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.1.0.tgz#f73207bb81207d75fd6c83f125af26eea378ca30"
+
+ansi-parser@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ansi-parser/-/ansi-parser-1.3.0.tgz#2ccf167aa6a60389a7f71624f376bb6f7fd571df"
+
+ansi-parser@1.4.0, ansi-parser@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/ansi-parser/-/ansi-parser-1.4.0.tgz#9fbf1d7f48351da5a8ebc8a7ce65ac8a09e2e14a"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -264,7 +282,7 @@ async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
 
-async@^1.4.0:
+async@^1.4.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -557,6 +575,12 @@ buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
 
+bug-killer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/bug-killer/-/bug-killer-1.0.0.tgz#be7b463fa5a70ee09b28d9e7da9de09086a213ea"
+  dependencies:
+    couleurs "^1.1.0"
+
 builtin-modules@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
@@ -666,6 +690,12 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+cli-box@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/cli-box/-/cli-box-2.1.1.tgz#b371176975777956f88250a320069764cffde982"
+  dependencies:
+    ansi-parser "1.3.0"
+
 cli-boxes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/cli-boxes/-/cli-boxes-1.0.0.tgz#4fa917c3e59c94a004cd61f8ee509da651687143"
@@ -685,6 +715,14 @@ cliui@^4.0.0:
     string-width "^2.1.1"
     strip-ansi "^4.0.0"
     wrap-ansi "^2.0.0"
+
+clp@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/clp/-/clp-1.2.0.tgz#7258408b6a8f5a43c393c9a41517ab415ce822cc"
+  dependencies:
+    ansi-parser "^1.4.0"
+    le-table "^2.1.0"
+    ul "^2.1.0"
 
 co@^4.6.0:
   version "4.6.0"
@@ -783,6 +821,12 @@ cors@^2.8.4:
     object-assign "^4"
     vary "^1"
 
+couleurs@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/couleurs/-/couleurs-1.1.0.tgz#7ac5fc7e56959bf38f0bf771c5fc25761dd7c6ce"
+  dependencies:
+    x256 "~0.0.1"
+
 create-error-class@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/create-error-class/-/create-error-class-3.0.2.tgz#06be7abef947a3f14a30fd610671d401bca8b7b6"
@@ -810,6 +854,12 @@ cssstyle@^1.0.0:
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-1.1.1.tgz#18b038a9c44d65f7a8e428a653b9f6fe42faf5fb"
   dependencies:
     cssom "0.3.x"
+
+csv-to-array@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/csv-to-array/-/csv-to-array-1.0.2.tgz#3bb5322f23b439f0ae85784757c397cb29513dd9"
+  dependencies:
+    a-csv "2.0.0"
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -1295,6 +1345,15 @@ fs-minipass@^1.2.5:
   dependencies:
     minipass "^2.2.1"
 
+fs-plus@^2.8.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/fs-plus/-/fs-plus-2.10.1.tgz#3204781d7840611e6364e7b6fb058c96327c5aa5"
+  dependencies:
+    async "^1.5.2"
+    mkdirp "^0.5.1"
+    rimraf "^2.5.2"
+    underscore-plus "1.x"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -1535,7 +1594,7 @@ iconv-lite@0.4.23:
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
-iconv-lite@^0.4.4:
+iconv-lite@^0.4.4, iconv-lite@^0.4.8:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   dependencies:
@@ -1807,6 +1866,10 @@ is-stream@^1.0.0, is-stream@^1.1.0:
 is-symbol@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-symbol/-/is-symbol-1.0.1.tgz#3cc59f00025194b6ab2e38dbae6689256b660572"
+
+is-there@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-there/-/is-there-2.0.0.tgz#7b0bae792b8ec56d29bbc04f870032ad0767df70"
 
 is-typedarray@~1.0.0:
   version "1.0.0"
@@ -2310,6 +2373,14 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
+le-table@^2.1.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/le-table/-/le-table-2.2.0.tgz#5dadd29cf819bed536e3d4014282044a60296f79"
+  dependencies:
+    cli-box "^2.1.1"
+    overlap "^1.5.0"
+    ul "2.1.0"
+
 left-pad@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
@@ -2783,6 +2854,12 @@ osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
+overlap@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/overlap/-/overlap-1.5.0.tgz#f5a956522257e2a660e96b4fb191eac6c8906aad"
+  dependencies:
+    ansi-parser "1.4.0"
+
 p-finally@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/p-finally/-/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
@@ -3180,7 +3257,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@^2.5.4, rimraf@^2.6.1:
+rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -3679,11 +3756,25 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
+ul@2.1.0, ul@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ul/-/ul-2.1.0.tgz#2e9c5039e39512840aefb862f25938e118bc563f"
+
 undefsafe@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-2.0.2.tgz#225f6b9e0337663e0d8e7cfd686fc2836ccace76"
   dependencies:
     debug "^2.2.0"
+
+underscore-plus@1.x:
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/underscore-plus/-/underscore-plus-1.6.8.tgz#894b5132763e9e5ce9d50f2687b68dba6082de22"
+  dependencies:
+    underscore "~1.8.3"
+
+underscore@~1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -3897,6 +3988,10 @@ ws@^5.2.0:
   resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
   dependencies:
     async-limiter "~1.0.0"
+
+x256@~0.0.1:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/x256/-/x256-0.0.2.tgz#c9af18876f7a175801d564fe70ad9e8317784934"
 
 xdg-basedir@^3.0.0:
   version "3.0.0"

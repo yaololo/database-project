@@ -21,6 +21,7 @@
   "devDependencies": {
     "jest": "^22.1.4",
     "nodemon": "^1.18.4",
-    "prettier": "^1.11.1"
+    "prettier": "^1.11.1",
+    "csv-to-array": "^1.0.2"
   }
 }
