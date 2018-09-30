@@ -4,12 +4,17 @@ import { Link, Route } from 'react-router-dom';
 import DigitalElectronic from '../../DigitalElectronic/DigitalElectronic';
 import HomeLiving from '../../HomeLiving/HomeLiving';
 import MenSports from '../../MenSports/MenSports';
-
+import Home from '../Home/Home';
 class Menu extends Component {
+  constructor(props) {
+    super();
+    this.data = props.data;
+  }
+
   render() {
     return (
-      <div>
-        <div id="nav_bar">
+      <div className="container">
+        <div id="nav_bar" className="container-fluid">
           <ul>
             <li>
               <Link to="/DigitalElectronic">DigitalElectronic</Link>
@@ -22,10 +27,9 @@ class Menu extends Component {
             </li>
           </ul>
         </div>
-        {/* <Route path="/" exact component={Home} /> */}
+        <Route path="/" exact render={() => <Home />} />
         <Route path="/HomeLiving" exact render={() => <HomeLiving />} />
         <Route path="/MenSports" exact component={MenSports} />
-        {/* {/* <Route path="/take_away" exact render={() => <DeliveryParentPage />} /> */}
         <Route
           path="/DigitalElectronic"
           exact
