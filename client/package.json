@@ -12,7 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "react-bootstrap": "^0.32.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

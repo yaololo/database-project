@@ -3,7 +3,7 @@ import './App.css';
 import Header from './component/shared/Header/Header';
 import { BrowserRouter } from 'react-router-dom';
 import Menu from './component/shared/Menu/Menu';
-import Home from './component/shared/Home/Home';
+// import Home from './component/shared/Home/Home';
 
 class App extends Component {
   constructor() {
@@ -46,16 +46,11 @@ class App extends Component {
     return (
       <div>
         <div className="big_wrapper">
-          <div className="container-fluid header">
-            <Header />
-          </div>
-          <div className="navbar">
-            <BrowserRouter>
-              <Menu />
-            </BrowserRouter>
-          </div>
           <div>
-            <Home data={[this.state.data, this.state.isGoodResponse]} />
+            <Header />
+            <BrowserRouter>
+              <Menu data={[this.state.data, this.state.isGoodResponse]} />
+            </BrowserRouter>
           </div>
         </div>
       </div>

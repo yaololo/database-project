@@ -1,20 +1,21 @@
-#nav_bar {
-  margin-top: 100px;
+.nav_bar {
   padding: 10px;
   background: #c9ccd3;
   background-blend-mode: lighten;
   background-color: #333;
   position: fixed;
+  width: 100vw;
+  margin-top: 100px;
 }
-#nav_bar ul li {
+.nav_bar ul li {
   display: inline-block;
   font-size: 20px;
   padding: 0px 30px;
 }
-#nav_bar ul li a {
+.nav_bar ul li a {
   text-decoration: none;
   color: white;
 }
-#nav_bar ul li a:hover {
+.nav_bar ul li a:hover {
   color: #c1c1c1;
 }

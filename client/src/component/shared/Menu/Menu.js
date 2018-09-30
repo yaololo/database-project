@@ -13,21 +13,24 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div id="nav_bar" className="container-fluid">
+      <div>
+        <div className="nav_bar">
           <ul>
             <li>
-              <Link to="/DigitalElectronic">DigitalElectronic</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/HomeLiving">HomeLiving</Link>
+              <Link to="/DigitalElectronic">Digital Electronic</Link>
+            </li>
+            <li>
+              <Link to="/HomeLiving">Music</Link>
             </li>
             <li>
               <Link to="/MenSports">Men Sports</Link>
             </li>
           </ul>
         </div>
-        <Route path="/" exact render={() => <Home />} />
+        <Route path="/" exact render={() => <Home data={this.props.data} />} />
         <Route path="/HomeLiving" exact render={() => <HomeLiving />} />
         <Route path="/MenSports" exact component={MenSports} />
         <Route
