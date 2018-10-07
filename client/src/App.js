@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('/hotItems', {
+    fetch('/api/hotItems', {
       method: 'get',
       headers: {
         'Content-Type': 'application/json'
