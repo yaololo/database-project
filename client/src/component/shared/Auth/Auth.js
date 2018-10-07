@@ -4,7 +4,7 @@ export function login({
   history,
   from,
 }) {
-  return fetch("/api/users/login", {
+  return fetch("/users/login", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -35,7 +35,7 @@ export function signup({
   password,
   history,
 }) {
-  return fetch('/api/users/signup', {
+  return fetch('/users/signup', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

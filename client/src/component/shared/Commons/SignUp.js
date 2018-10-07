@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { signup } from "../Auth/Auth";
 import { object } from "prop-types";
 
-
 class SignUp extends React.Component {
   static propTypes = {
     history: object.isRequired,
