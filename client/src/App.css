@@ -1,12 +1,3 @@
-.big_wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  text-align: center;
-  margin: 0px auto;
-  background-color: whitesmoke;
-}
-
-
 @import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CRaleway:100,300,600,700,800");
 
 /* Scaffolding

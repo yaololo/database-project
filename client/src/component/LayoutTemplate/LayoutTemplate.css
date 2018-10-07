@@ -3,6 +3,7 @@ img {
   height: 190px;
 }
 .content {
+  text-align:center;
   max-width: 243px;
   max-height: 413px;
   box-sizing: border-box;
