@@ -1,12 +1,13 @@
 const mysql = require('mysql');
+require('dotenv').config();
 
 var dbSetup = {
   connect: function() {
     var connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: 'password',
-      database: 'school_project'
+      password: process.env.PROEJCT_PASSWORD,
+      database: process.env.PROJECT_NAME
     });
     connection.connect(function(error) {
       if (error) {
