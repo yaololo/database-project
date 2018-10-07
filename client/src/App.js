@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import Login from './component/shared/Commons/Login';
+import SignUp from "./component/shared/Commons/SignUp";
 import './App.css';
 import Header from './component/shared/Header/Header';
-import { BrowserRouter } from 'react-router-dom';
-import Menu from './component/shared/Menu/Menu';
-// import Home from './component/shared/Home/Home';
+import Footer from './component/shared/Footer/Footer'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import NotFound from './component/shared/404NotFound/NotFound';
+import Home from './component/shared/Home/Home';
+
 
 class App extends Component {
   constructor() {
@@ -42,16 +46,25 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.data);
     return (
-      <div>
-        <div className="big_wrapper">
-          <div>
-            <BrowserRouter>
-              <Menu data={[this.state.data, this.state.isGoodResponse]} />
-            </BrowserRouter>
+      <div className="big_wrapper">
+        <BrowserRouter>
+        <div>
+           <Header />
+          <Switch>
+            <Route path="/" exact render={() => <Home data={this.state.data} />} />
+            <Route path="/login" exact component={Login} />
+
+            <Route path="/signup" exact component={SignUp} />
+            {/* <PrivateRoute path="/account" component={Profile} /> */}
+            {/* <Route path="/forgot" component={Forgot} /> */}
+            {/* <Route path="/reset/:token" component={Reset} /> */}
+            <Route path= '*' component={NotFound} />
+          </Switch>
           </div>
-        </div>
+        </BrowserRouter>
+        {/* <Home data={this.props.data} />  */}
+        <Footer/>
       </div>
     );
   }
