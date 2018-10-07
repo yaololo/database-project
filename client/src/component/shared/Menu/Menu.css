@@ -1,11 +1,11 @@
 .nav_bar {
   padding: 10px;
-  background: #c9ccd3;
+  background: rgb(0, 195, 255);
   background-blend-mode: lighten;
-  background-color: #333;
+  /* background-color:  rgba(185, 178, 178, 0.151); */
   position: fixed;
   width: 100vw;
-  margin-top: 100px;
+  z-index: 10;
 }
 .nav_bar ul li {
   display: inline-block;

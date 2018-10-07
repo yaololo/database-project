@@ -47,7 +47,6 @@ class App extends Component {
       <div>
         <div className="big_wrapper">
           <div>
-            <Header />
             <BrowserRouter>
               <Menu data={[this.state.data, this.state.isGoodResponse]} />
             </BrowserRouter>
