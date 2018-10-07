@@ -6,7 +6,7 @@ var dbSetup = {
     var connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: process.env.PROEJCT_PASSWORD,
+      password: process.env.PROJECT_PASSWORD,
       database: process.env.PROJECT_NAME
     });
     connection.connect(function(error) {
