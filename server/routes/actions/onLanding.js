@@ -3,11 +3,7 @@ const dbSetup = require('../../DbConnection/setupConnection');
 const onLandingAction = async function(req, res) {
   try {
     var connection = dbSetup.connect();
-    connection.query('SELECT * FROM Products', function(
-      error,
-      results,
-      fields
-    ) {
+    connection.query('SELECT * FROM product', function(error, results, fields) {
       if (error) {
         console.log(error);
         return res.status(500).send(
