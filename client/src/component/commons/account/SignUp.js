@@ -1,18 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { signup } from "../Auth/Auth";
-import { object } from "prop-types";
+import { object, instanceOf } from "prop-types";
+import { withCookies, Cookies } from "react-cookie";
+import { ProviderContext, subscribe } from "react-contextual";
+import {
+  mapSessionContextToProps,
+  sessionContextPropType
+} from "../../../context_helper";
 
 class SignUp extends React.Component {
   static propTypes = {
     history: object.isRequired,
+    cookies: instanceOf(Cookies).isRequired,
+    ...sessionContextPropType
   };
 
   constructor(props) {
     super(props);
     this.state = { name: "", email: "", password: "" };
   }
-
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -25,6 +32,8 @@ class SignUp extends React.Component {
       email: this.state.email,
       password: this.state.password,
       history: this.props.history,
+      cookies: this.props.cookies,
+      sessionContext: this.props.sessionContext
     });
   }
 
@@ -36,7 +45,7 @@ class SignUp extends React.Component {
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <h4 htmlFor="name">Name</h4>
                 <input
                   type="text"
                   name="name"
@@ -49,7 +58,7 @@ class SignUp extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <h4 htmlFor="email">Email</h4>
                 <input
                   type="email"
                   name="email"
@@ -62,12 +71,11 @@ class SignUp extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <h4 htmlFor="password">Password</h4>
                 <input
                   type="password"
                   name="password"
                   autoComplete="password"
-                  
                   id="password"
                   placeholder="Password"
                   className="form-control"
@@ -81,7 +89,11 @@ class SignUp extends React.Component {
                   <Link to="/">Terms of Service</Link>.
                 </small>
               </div>
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                data-cy="signUp-submit"
+              >
                 Create an account
               </button>
             </form>
@@ -98,4 +110,12 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapContextToProps = context => {
+  return {
+    ...mapSessionContextToProps(context),
+  };
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(
+  withCookies(SignUp)
+);

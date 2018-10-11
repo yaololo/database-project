@@ -1,11 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
 class Header extends React.Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     const active = { borderBottomColor: "#3f51b5" };
+
     const rightNav =
-      (<ul className="nav navbar-nav navbar-right">
+     this.props.logInStatus ? (
+      <div>
+        <ul className="nav navbar-nav navbar-left">
+          <li>
+            <NavLink exact to="/" activeStyle={active}>
+              My Dashboard
+            </NavLink>
+          </li>
+        </ul>
+          Logged In
+      </div>
+    ) :
+     (<ul className="nav navbar-nav navbar-right">
         <li>
           <NavLink to="/login" activeStyle={active}>
             Log in

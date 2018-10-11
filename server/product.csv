@@ -1,0 +1,43 @@
+product_id,p_name,description,category_id,brand_id,unit_price,image
+A_00000001,SWAROVSKI Necklace Pendant Silver Woman Authentic Used B844,,C_00000001,B_00000001,144,https://i.ebayimg.com/images/g/lUQAAOSwj85YNPQK/s-l500.jpg
+A_00000002,UNLOCKED APPLE IPHONE X 256 GB Grey,,C_00000002,B_00000002,731,https://i.ebayimg.com/images/g/gMsAAOSwCMVbp5TB/s-l1600.jpg
+A_00000003,UT UNIQLO ONE PIECE Ace Weekly-Jump 50th graphic T-Shirt Japan S/M/L/XL,,C_00000003,B_00000003,23.8,https://i.ebayimg.com/images/g/8yAAAOSwIOtbYV29/s-l500.jpg
+A_00000004,adidas Men's Ultraboost Running Shoe,,C_00000004,B_00000004,294.25,https://i.ebayimg.com/images/g/xakAAOSwgG5bpXJt/s-l1600.jpg
+A_00000005,Yamaha U3 UPRIGHT PIANO,,C_00000005,B_00000005,3980,https://i.ebayimg.com/images/g/u54AAOSwFFZbEFtq/s-l1600.jpg
+A_00000006,(Unlocked) NEW Apple iPhone Xs Max 256GB Space Grey HK (A2104) (Dual Sim),,C_00000002,B_00000002,1689,https://i.ebayimg.com/images/g/6KEAAOSwJjpbmbYl/s-l500.jpg
+A_00000007,NIKE CTR360 TREQUARTISTA II FG FOOTBALL BOOTS SOCCER CLEATS,,C_00000004,B_00000006,79.9,https://i.ebayimg.com/images/g/9E4AAOSwhdlbr0gM/s-l1600.jpg
+A_00000008,H&M Men’s Slim Blue Jeans 33x32 B9815,,C_00000003,B_00000007,25.99,https://i.ebayimg.com/images/g/a28AAOSwzf9ba4CC/s-l1600.jpg
+A_00000009,Speedo Men's PowerFLEX Eco Revolve Splice Jammer Swimsuit,,C_00000004,B_00000008,80.93,https://i.ebayimg.com/images/g/kooAAOSwKsdbpFhy/s-l1600.jpg
+A_00000010,Lancome Genifique Yeux Youth Activating Eye cream 15g New In Box and Sealed,,C_00000007,B_00000009,70.99,https://i.ebayimg.com/images/g/OLkAAOSwYutan1VJ/s-l1600.jpg
+A_00000011,CHANEL No 5 100 ml 3.3 oz Eau de Parfum EDP perfume 18Aug24A-P,,C_00000008,B_00000010,50.9,https://i.ebayimg.com/images/g/yoMAAOSwDftbm8~v/s-l500.jpg
+A_00000012,Adidas Originals California Retro Essentials Crew Neck Short Sleeve Men T-Shirt,,C_00000003,B_00000004,16.68,https://i.ebayimg.com/images/g/EI4AAOSwJjNbrRVx/s-l1600.png
+A_00000013,Chanel Tote bag Brown Woman Authentic Used M957,,C_00000009,B_00000010,2035,https://i.ebayimg.com/images/g/g9UAAOSwB09YSTYH/s-l500.jpg
+A_00000014,"PANAMA , EXCELLENT ITALIAN LEATHER SOFA",,C_00000006,B_00000011,2900,https://i.ebayimg.com/images/g/CXMAAOSwo1pa1lcd/s-l1600.jpg
+A_00000015,Woo Single #2,,C_00000005,B_00000000,2,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_6_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_6_flat.jpg"
+A_00000016,Woo Single #1,,C_00000005,B_00000000,10,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_4_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_4_flat.jpg"
+A_00000017,Woo Singles,,C_00000005,B_00000000,12,http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_6_flat.jpg
+A_00000018,Woo Album #4,,C_00000005,B_00000000,14,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_5_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_5_flat.jpg"
+A_00000019,Woo Album #3,,C_00000005,B_00000000,16,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_3_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_3_flat.jpg"
+A_00000020,Woo Album #2,,C_00000005,B_00000000,12,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_2_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_2_flat.jpg"
+A_00000021,Woo Album #1,,C_00000005,B_00000000,22,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_1_angle.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/cd_1_flat.jpg"
+A_00000022,Woo Logo,,C_00000010,B_00000000,14,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/poster_5_up.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/Poster_5_flat.jpg"
+A_00000023,Woo Ninja,,C_00000010,B_00000000,22,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/poster_4_up.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/Poster_4_flat.jpg"
+A_00000024,Premium Quality,,C_00000010,B_00000000,12,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/poster_3_up.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/Poster_3_flat.jpg"
+A_00000025,Flying Ninja,,C_00000010,B_00000000,12,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/poster_2_up.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/Poster_2_flat.jpg"
+A_00000026,Ship Your Idea,,C_00000010,B_00000000,4,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/poster_1_up.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/Poster_1_flat.jpg"
+A_00000027,Woo Logo,,C_00000003,B_00000000,2,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_6_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_6_back.jpg"
+A_00000028,Ninja Silhouette,,C_00000003,B_00000000,113,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_5_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_5_back.jpg"
+A_00000029,Happy Ninja,,C_00000003,B_00000000,22,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_4_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_4_back.jpg"
+A_00000030,Patient Ninja,,C_00000003,B_00000000,12,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_3_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_3_back.jpg"
+A_00000031,Woo Ninja,,C_00000003,B_00000000,19.99,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_2_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_2_back.jpg"
+A_00000032,Ship Your Idea,,C_00000003,B_00000000,13,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_7_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_7_back.jpg,"
+A_00000033,"Ship Your Idea - Blue, XL",,C_00000003,B_00000000,20,http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_1_front.jpg
+A_00000034,"Ship Your Idea - Black, L",,C_00000003,B_00000000,24,http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_7_front.jpg
+A_00000035,Happy Ninja,,C_00000003,B_00000000,25,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_7_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_7_back.jpg"
+A_00000036,Woo Ninja,,C_00000003,B_00000000,26,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_6_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_6_back.jpg"
+A_00000037,Ninja Silhouette,,C_00000003,B_00000000,27,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_5_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_5_back.jpg"
+A_00000038,Ship Your Idea,,C_00000003,B_00000000,28,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_4_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_3_back.jpg,"
+A_00000039,Ship Your Idea - Green,,C_00000003,B_00000000,22,http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_3_front.jpg
+A_00000040,Ship Your Idea - Black,,C_00000003,B_00000000,21,http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_4_front1.jpg
+A_00000041,Premium Quality,,C_00000003,B_00000000,11,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_back.jpg"
+A_00000042,Woo Logo,,C_00000003,B_00000000,18,"http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_1_front.jpg, http://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_1_back.jpg"

@@ -1,24 +1,96 @@
-import React, { Component } from 'react';
-import Login from './component/shared/Commons/Login';
-import SignUp from "./component/shared/Commons/SignUp";
+import Login from './component/commons/account/Login';
+import SignUp from "./component/commons/account/SignUp";
+import Profile from "./component/commons/account/SignUp"
 import './App.css';
-import Header from './component/shared/Header/Header';
-import Footer from './component/shared/Footer/Footer'
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import NotFound from './component/shared/404NotFound/NotFound';
-import Home from './component/shared/Home/Home';
+import Header from './component/commons/Header/Header';
+import Footer from './component/commons/Footer/Footer'
+import NotFound from './component/commons/404NotFound/NotFound';
+import Home from './component/commons/Home/Home';
 
-
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Provider } from "react-contextual";
+import React, { Component } from 'react';
+import { CookiesProvider } from "react-cookie";
 class App extends Component {
+  isAuthenticated = false;
+
   constructor() {
     super();
-
     this.state = {
       data: [],
-      isGoodResponse: true
     };
-    this.data1 = [];
-    this.notFetchedData = true;
+  }
+
+  saveSession = (jwtToken, user) => {
+    this.isAuthenticated = true;
+    return { jwtToken, user };
+  };
+
+  clearSession = () => {
+    this.isAuthenticated = false;
+    return { jwtToken: null, user: {} };
+  };
+
+  store = {
+    initialState: { jwtToken: null, user: {}, messages: {} },
+    actions: {
+      saveSession: this.saveSession,
+      clearSession: this.clearSession,
+      updateUserProfile: newProfile => state => ({
+        user: Object.assign(state.user, newProfile)
+      }),
+      clearMessages: () => ({ messages: {} }),
+      setErrorMessages: errors => ({ messages: { error: errors } }),
+      setSuccessMessages: success => ({ messages: { success: success } }),
+      setInfoMessages: info => ({ messages: { info: info } })
+    }
+  };
+
+  PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        this.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+
+
+  render() {
+    return (
+      <Provider {...this.store}>
+        <CookiesProvider>
+          <BrowserRouter>
+            <div>
+              <Header />
+              <Switch>
+                <Route path="/" exact render={() => <Home data={this.state.data} />} />
+                <Route path="/login" exact component={Login} />
+                <Route path="/signup" exact component= {SignUp} />
+                <this.PrivateRoute path="/account" component={Profile} />
+                <this.PrivateRoute
+                  path="/mydashboard"
+                  component={Home}
+                />
+                <Route path="*" component={NotFound} />
+              </Switch>
+              <div>
+                <Footer />
+              </div>
+            </div>
+          </BrowserRouter>
+        </CookiesProvider>
+      </Provider>
+    );
   }
 
   componentWillMount() {
@@ -43,30 +115,6 @@ class App extends Component {
         );
       }
     });
-  }
-
-  render() {
-    return (
-      <div className="big_wrapper">
-        <BrowserRouter>
-        <div>
-           <Header />
-          <Switch>
-            <Route path="/" exact render={() => <Home data={this.state.data} />} />
-            <Route path="/login" exact component={Login} />
-
-            <Route path="/signup" exact component={SignUp} />
-            {/* <PrivateRoute path="/account" component={Profile} /> */}
-            {/* <Route path="/forgot" component={Forgot} /> */}
-            {/* <Route path="/reset/:token" component={Reset} /> */}
-            <Route path= '*' component={NotFound} />
-          </Switch>
-          </div>
-        </BrowserRouter>
-        {/* <Home data={this.props.data} />  */}
-        <Footer/>
-      </div>
-    );
   }
 }
 
