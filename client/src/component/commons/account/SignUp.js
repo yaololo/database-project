@@ -18,11 +18,12 @@ class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "", password: "" };
+    this.state = { firstName: "", lastName: "", email: "", password: "", gender: "" };
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.value)
   }
 
   handleSignup(event) {
@@ -45,13 +46,25 @@ class SignUp extends React.Component {
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
-                <h4 htmlFor="name">Name</h4>
+                <h4 htmlFor="name">First Name</h4>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="firstName"
+                  id="first-name"
                   placeholder="Name"
                   autoFocus
+                  className="form-control"
+                  value={this.state.name}
+                  onChange={this.handleChange.bind(this)}
+                />
+              </div>
+              <div className="form-group">
+                <h4 htmlFor="name">Last Name</h4>
+                <input
+                  type="text"
+                  name="lastName"
+                  id="last-name"
+                  placeholder="Name"
                   className="form-control"
                   value={this.state.name}
                   onChange={this.handleChange.bind(this)}
@@ -82,6 +95,30 @@ class SignUp extends React.Component {
                   value={this.state.password}
                   onChange={this.handleChange.bind(this)}
                 />
+              </div>
+              <div className="form-group">
+                <span>
+                  <label className="gender-label">Male 
+                    <input
+                      type="radio"
+                      name="gender"
+                      value= "M"
+                      checked="checked"
+                      onChange={this.handleChange.bind(this)}
+                    />
+                  </label>
+                </span>
+                <span>
+                  <label className="gender-label">Female 
+                    <input
+                      type="radio"
+                      name="gender"
+                      value= "F"
+                      onChange={this.handleChange.bind(this)}
+                    />
+                    {/* <span className="checkmark"></span> */}
+                  </label>
+                </span>
               </div>
               <div className="form-group">
                 <small className="text-muted">
