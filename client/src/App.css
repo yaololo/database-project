@@ -302,3 +302,13 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+
+.gender-label{
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-right: 20px
+}
