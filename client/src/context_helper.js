@@ -26,9 +26,10 @@ export const authenticatedSessionContextPropType = {
   sessionContext: shape({
     token: string.isRequired,
     user: shape({
-      picture: string,
-      gravatar: string,
-      firstname: string,
+      // picture: string,
+      // gravatar: string,
+      firstName: string,
+      lastName: string,
       email: string.isRequired,
       id: string,
       type: string.isRequired
