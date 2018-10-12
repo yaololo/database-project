@@ -23,13 +23,14 @@ class SignUp extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.value)
   }
 
   handleSignup(event) {
     event.preventDefault();
     signup({
-      name: this.state.name,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      gender: this.state.gender,
       email: this.state.email,
       password: this.state.password,
       history: this.props.history,
@@ -116,7 +117,6 @@ class SignUp extends React.Component {
                       value= "F"
                       onChange={this.handleChange.bind(this)}
                     />
-                    {/* <span className="checkmark"></span> */}
                   </label>
                 </span>
               </div>
