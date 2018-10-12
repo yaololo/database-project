@@ -7,7 +7,7 @@ export function login({
   from,
   sessionContext
 }) {
-  return fetch("/api/users/login", {
+  return fetch("/api/user/login", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -36,19 +36,23 @@ export function login({
 }
 
 export function signup({
-  name,
+  firstName,
+  lastName,
+  gender,
   email,
   password,
   history,
   cookies,
   sessionContext
 }) {
-  return fetch("/api/users/signup", {
+  return fetch("/api/user/signup", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user: {
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
         email: email,
         password: password
       }
