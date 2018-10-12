@@ -18,7 +18,6 @@ class Header extends React.Component {
   };
 
   render() {
-
     const active = { borderBottomColor: "#3f51b5" };
     const loginNav = this.props.sessionContext.token ? (
       <div>
@@ -36,15 +35,7 @@ class Header extends React.Component {
               data-toggle="dropdown"
               className="navbar-avatar dropdown-toggle"
             >
-              {/* <img
-                alt="avatar"
-                src={
-                  this.props.sessionContext.user.picture ||
-                  this.props.sessionContext.user.gravatar
-                }
-              /> */}  
-                test user
-
+              {this.props.sessionContext.user.firstName}
               <i className="caret" />
             </a>
             <ul className="dropdown-menu">
@@ -52,6 +43,11 @@ class Header extends React.Component {
                 <Link to="/">My Account</Link>
               </li>
               <li className="divider" />
+              <li>
+                <a href="/">
+                  Logout
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
