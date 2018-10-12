@@ -1,6 +1,5 @@
 import { object, shape, func, string } from "prop-types";
 
-
 export function mapSessionContextToProps(context) {
   return {
     sessionContext: {
@@ -29,9 +28,10 @@ export const authenticatedSessionContextPropType = {
     user: shape({
       picture: string,
       gravatar: string,
-      name: string,
+      firstname: string,
       email: string.isRequired,
-      id: string
+      id: string,
+      type: string.isRequired
     }),
     saveSession: func.isRequired,
     clearSession: func.isRequired
