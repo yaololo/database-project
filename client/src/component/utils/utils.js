@@ -1,11 +1,10 @@
-export function updateCart (itemId, customerId, quantity){
+export function updateCart (itemId, customerId){
   fetch('/api/updateCart', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       itemId: itemId,
       customerId: customerId,
-      quantity: quantity
     })
   }).then(response => {
     if (response.ok) {
