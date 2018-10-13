@@ -20,7 +20,8 @@ const loginHandler = async function(req, res) {
         user.email = results[0].email;
         user.firstName = results[0].frist_name;
         user.lastName = results[0].last_name;
-        user.userType =  results[0].last_name,
+        user.userType =  results[0].last_name;
+        user.id = results[0].user_id;
         console.log(user);
         return res.status(200).send(
           JSON.stringify({
