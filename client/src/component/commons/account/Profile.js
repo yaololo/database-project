@@ -13,7 +13,6 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       email: props.sessionContext.user.email,
-      name: props.sessionContext.user.name,
       password: "",
       confirm: ""
     };
@@ -22,7 +21,6 @@ class Profile extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       email: nextProps.sessionContext.user.email,
-      name: nextProps.sessionContext.user.name,
     };
   }
 

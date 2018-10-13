@@ -35,17 +35,17 @@ export const sessionContextPropType = {
   }).isRequired
 };
 
-// export const authenticatedSessionContextPropType = {
-//   sessionContext: shape({
-//     token: string.isRequired,
-//     user: shape({
-//       firstName: string,
-//       lastName: string,
-//       email: string.isRequired,
-//       id: string,
-//       userType: string.isRequired
-//     }),
-//     saveSession: func.isRequired,
-//     clearSession: func.isRequired
-//   }).isRequired
-// };
+export const authenticatedSessionContextPropType = {
+  sessionContext: shape({
+    token: string.isRequired,
+    user: shape({
+      firstName: string,
+      lastName: string,
+      email: string.isRequired,
+      id: string.isRequired,
+      userType: string.isRequired
+    }),
+    saveSession: func.isRequired,
+    clearSession: func.isRequired
+  }).isRequired
+};
