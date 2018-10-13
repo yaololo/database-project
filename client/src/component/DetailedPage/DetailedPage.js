@@ -3,6 +3,7 @@ import './DetailedPage.css'
 import { mapSessionContextToProps, sessionContextPropType } from "../../context_helper";
 import { updateCart } from '../utils/utils';
 import { ProviderContext, subscribe } from "react-contextual";
+import { withRouter } from "react-router";
 
 class DetailedPage extends Component {
   static propTypes = {
@@ -16,12 +17,15 @@ class DetailedPage extends Component {
 
   onChangeHandler(event){
     event.preventDefault();
-    console.log(event.target.value)
     this.setState({ quantity: event.target.value });
   }
 
-  onClickHandler(event){
-    updateCart(this.props.location.state.key.product_id, this.props.sessionContext.user.id, this.state.quantity);
+  addToCartHandler(event){
+    if(this.props.sessionContext.user.id === undefined){
+      this.props.history.push('/login')
+    }else{
+      updateCart(this.props.location.state.key.product_id, this.props.sessionContext.user.id, this.state.quantity);
+    }
   }
 
 
@@ -34,7 +38,7 @@ class DetailedPage extends Component {
           <div className="wrapper row">
             <div className="preview col-md-6">
               <div className="tab-content">
-                <img src={this.props.location.state.key.image} alt=""/>
+                <img src={this.props.location.state.key.image.split(',')[0]} alt=""/>
               </div>
             </div>
             <div className="details col-md-6">
@@ -67,10 +71,10 @@ class DetailedPage extends Component {
               </h5>
               <div className="qty-counter">
                   <span>Quantity: </span>
-                  <input type="number" name="quantity" min="1" maxLength="4" size="4" placeholder="1" onChange={this.onChangeHandler.bind(this)}/>
+                  <input type="number" name="quantity" min="1" maxLength="4" size="4" value={this.state.quantity} onChange={this.onChangeHandler.bind(this)}/>
               </div>
               <div className="action">
-                <button className="add-to-cart btn btn-default" type="button" onClick={this.onClickHandler.bind(this)}>add to cart</button>
+                <button className="add-to-cart btn btn-default" type="button" onClick={this.addToCartHandler.bind(this)}>add to cart</button>
               </div>
             </div>
           </div>
@@ -88,5 +92,5 @@ const mapContextToProps = context => {
 };
 
 export default subscribe(ProviderContext, mapContextToProps)(
-  DetailedPage
+  withRouter(DetailedPage)
 );
