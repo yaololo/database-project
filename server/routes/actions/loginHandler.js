@@ -8,7 +8,7 @@ const loginHandler = async function(req, res) {
     }
 
     var connection = dbSetup.connect();
-    connection.query('SELECT frist_name, last_name, email, user_type FROM `users` WHERE `email`= ? AND `auth` = ?;', [user.email, user.password], function(error, results, fields) {
+    connection.query('SELECT user_id, frist_name, last_name, email, user_type FROM `users` WHERE `email`= ? AND `auth` = ?;', [user.email, user.password], function(error, results, fields) {
       if (error) {
         console.log(error);
         return res.status(500).send(
@@ -20,9 +20,8 @@ const loginHandler = async function(req, res) {
         user.email = results[0].email;
         user.firstName = results[0].frist_name;
         user.lastName = results[0].last_name;
-        user.userType =  results[0].last_name;
+        user.userType =  results[0].user_type;
         user.id = results[0].user_id;
-        console.log(user);
         return res.status(200).send(
           JSON.stringify({
             token: 'true',
