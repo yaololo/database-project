@@ -16,7 +16,6 @@ class LayoutTemplate extends Component {
   }
 
   onClickHandler(item, event){
-    console.log(item)
     this.props.history.push({
       pathname:`/product/${item.product_id}`,
       state:{
