@@ -6,6 +6,7 @@ import Header from './component/commons/Header/Header';
 import Footer from './component/commons/Footer/Footer'
 import NotFound from './component/commons/404NotFound/NotFound';
 import Home from './component/commons/Home/Home';
+import DetailedPage from './component/DetailedPage/DetailedPage';
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-contextual";
@@ -31,8 +32,11 @@ class App extends Component {
     return { jwtToken: null, user: {} };
   };
 
+  updateItems = () =>{
+    
+  }
   store = {
-    initialState: { jwtToken: null, user: {}, messages: {} },
+    initialState: { jwtToken: null, user: {}, messages: {} , cartItems: [], itemsId: [], itemsWithQty: {} },
     actions: {
       saveSession: this.saveSession,
       clearSession: this.clearSession,
@@ -76,11 +80,10 @@ class App extends Component {
                 <Route path="/" exact render={() => <Home data={this.state.data} />} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component= {SignUp} />
+                <Route path="/product/:productId" exact component={DetailedPage} />
+                {/* <Route path="/product" exact component= {SignUp} /> */}
                 <this.PrivateRoute path="/account" component={Profile} />
-                <this.PrivateRoute
-                  path="/mydashboard"
-                  component={Home}
-                />
+                <this.PrivateRoute ath="/mydashboard" component={Home} />
                 <Route path="*" component={NotFound} />
               </Switch>
               <div>
@@ -107,7 +110,6 @@ class App extends Component {
           });
         });
       } else {
-        this.notFetchedData = false;
         response.json().then(json =>
           this.setState({
             data: json.data
