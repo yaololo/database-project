@@ -12,6 +12,19 @@ export function mapSessionContextToProps(context) {
   };
 }
 
+export function mapItemsToCart(context) {
+  return {
+    cartItems: context.cartItems,
+    itemsId: context.itemsId,
+    itemsWithQty: context.itemsWithQty,
+    singleItem: context.singleItem
+  }
+}
+
+// export const cartPropType = {
+
+// }
+
 export const sessionContextPropType = {
   sessionContext: shape({
     token: string,
@@ -22,17 +35,17 @@ export const sessionContextPropType = {
   }).isRequired
 };
 
-export const authenticatedSessionContextPropType = {
-  sessionContext: shape({
-    token: string.isRequired,
-    user: shape({
-      firstName: string,
-      lastName: string,
-      email: string.isRequired,
-      id: string,
-      userType: string.isRequired
-    }),
-    saveSession: func.isRequired,
-    clearSession: func.isRequired
-  }).isRequired
-};
+// export const authenticatedSessionContextPropType = {
+//   sessionContext: shape({
+//     token: string.isRequired,
+//     user: shape({
+//       firstName: string,
+//       lastName: string,
+//       email: string.isRequired,
+//       id: string,
+//       userType: string.isRequired
+//     }),
+//     saveSession: func.isRequired,
+//     clearSession: func.isRequired
+//   }).isRequired
+// };
