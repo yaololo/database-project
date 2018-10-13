@@ -15,15 +15,6 @@ class LayoutTemplate extends Component {
     };
   }
 
-  // addToCartHandler(event){
-  //   event.preventDefault();
-
-  //   updateCart(event.target.value, this.props.sessionContext.user.id)
-  //   console.log(JSON.stringify(event.target.value))
-  //   // this.props.itemsId.push(event.target.value)
-  //   this.props.itemsWithQty = mapArrayToObject(this.props.itemsId)
-  // }
-
   onClickHandler(item, event){
     console.log(item)
     this.props.history.push({
@@ -41,28 +32,18 @@ class LayoutTemplate extends Component {
         <div className="product-list">
           {this.props.data.map((element, i) => {
             this.item =element;
-            // this.props.singleItem = element;
             return (
               <div key={i} className="content">
                 <div className="picture">
-                  <img src={element.image.split(',')[0]} alt="" />
+                  <img src={element.image.split(',')[0]} alt="" onClick= {this.onClickHandler.bind(this, this.item)}/>
+                  <h1></h1>
                 </div>
                 <div className="short-description">
                   {element.p_name}
                 </div>
-                <div className="price">{element.description}</div>
-                <div className="short-description">
+                <br/>
+                <div className="item-price">
                   {`$${element.unit_price}`}
-                </div>
-                <div className="purchase-button">
-                  <button 
-                    className="order-button" 
-                    type="button" 
-                    value = {element.product_id}
-                    onClick= {this.onClickHandler.bind(this, this.item)}
-                    >
-                    Add to cart
-                  </button>
                 </div>
               </div>
               );
