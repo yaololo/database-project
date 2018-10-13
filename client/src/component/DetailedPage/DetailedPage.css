@@ -4,6 +4,18 @@ img {
 /* .action{
   padding-bottom: 3%;
 } */
+.qty-counter{
+  margin-bottom: 10px;
+}
+.qty-input{
+  height:25px;
+ background-color: white;
+}
+
+/* input[type=number]::-webkit-inner-spin-button {
+  opacity: 1;
+} */
+
 .preview {
   display: -webkit-box;
   display: -webkit-flex;
@@ -152,3 +164,4 @@ img {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); } }
+
