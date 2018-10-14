@@ -1,5 +1,5 @@
 export function updateCart (itemId, customerId, quantity){
-  fetch('/api/updateCart', {
+  fetch('/api/update_cart', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
