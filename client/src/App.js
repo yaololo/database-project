@@ -1,17 +1,18 @@
 import Login from './component/commons/account/Login';
 import SignUp from "./component/commons/account/SignUp";
-import Profile from "./component/commons/account/SignUp"
 import './App.css';
 import Header from './component/commons/Header/Header';
 import Footer from './component/commons/Footer/Footer'
 import NotFound from './component/commons/404NotFound/NotFound';
 import Home from './component/commons/Home/Home';
 import DetailedPage from './component/DetailedPage/DetailedPage';
+import ShoppingCart from './component/ShoppingCart/ShoppingCart';
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-contextual";
 import React, { Component } from 'react';
 import { CookiesProvider } from "react-cookie";
+
 class App extends Component {
   isAuthenticated = false;
 
@@ -32,14 +33,15 @@ class App extends Component {
     return { jwtToken: null, user: {} };
   };
 
-  updateItems = () =>{
-    
+  updateItemsQty = (noItems) =>{
+    return noItems
   }
   store = {
-    initialState: { jwtToken: null, user: {}, messages: {} , cartItems: [], itemsId: [], itemsWithQty: {} },
+    initialState: { jwtToken: null, user: {}, messages: {} , cartItems: [], itemsId: [], noItems: 0 },
     actions: {
       saveSession: this.saveSession,
       clearSession: this.clearSession,
+      updateItemsQty: this.updateItemsQty,
       updateUserProfile: newProfile => state => ({
         user: Object.assign(state.user, newProfile)
       }),
@@ -80,10 +82,11 @@ class App extends Component {
                 <Route path="/" exact render={() => <Home data={this.state.data} />} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component= {SignUp} />
+                <Route path="/my_cart" exact render={() => <ShoppingCart data={this.state.data} />} />
                 <Route path="/product/:productId" exact component={DetailedPage} />
-                {/* <Route path="/product" exact component= {SignUp} /> */}
-                <this.PrivateRoute path="/account" component={Profile} />
-                <this.PrivateRoute ath="/mydashboard" component={Home} />
+                {/* <Route path="/myCart" exact component= {ShoppingCart} /> */}
+                {/* <this.PrivateRoute path="/account" component={Profile} /> */}
+                {/* <this.PrivateRoute path="/my_cart" component={ShoppingCart} /> */}
                 <Route path="*" component={NotFound} />
               </Switch>
               <div>
@@ -97,7 +100,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    fetch('/api/hotItems', {
+    fetch('/api/hot_items', {
       method: 'get',
       headers: {
         'Content-Type': 'application/json'
