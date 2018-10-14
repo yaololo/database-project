@@ -5,7 +5,8 @@ export function login({
   history,
   cookies,
   from,
-  sessionContext
+  sessionContext,
+  sessionCartInfo
 }) {
   return fetch("/api/user/login", {
     method: "post",
