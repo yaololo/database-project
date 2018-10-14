@@ -1,4 +1,4 @@
-import { object, shape, func, string } from "prop-types";
+import { object, shape, func, string, array, number } from "prop-types";
 
 export function mapSessionContextToProps(context) {
   return {
@@ -14,16 +14,20 @@ export function mapSessionContextToProps(context) {
 
 export function mapItemsToCart(context) {
   return {
-    cartItems: context.cartItems,
-    itemsId: context.itemsId,
-    itemsWithQty: context.itemsWithQty,
-    singleItem: context.singleItem
+    sessionCartInfo: {
+      cartItems: context.cartItems,
+      noItems: context.noItems,
+      updateItemsQty: context.actions.updateItemsQty
+    }
   }
 }
-
-// export const cartPropType = {
-
-// }
+export const sessionCartInfoPropType = {
+  sessionCartInfo: shape({
+    cartItems: array,
+    noItems: number,
+    updateItemsQty: func.isRequired
+  })
+}
 
 export const sessionContextPropType = {
   sessionContext: shape({
