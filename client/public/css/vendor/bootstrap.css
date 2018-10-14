@@ -1606,7 +1606,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1100px;
   }
 }
 .container-fluid {
@@ -2347,7 +2347,7 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+  background-color: rgba(31, 21, 21, 0.034);
 }
 caption {
   padding-top: 8px;
