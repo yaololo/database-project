@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-
+import { withRouter } from "react-router";
+import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../context_helper"
+import { ProviderContext, subscribe } from "react-contextual";
 class ShoppingCart extends Component {
+  static propTypes = {
+    ...sessionContextPropType,
+    ...sessionCartInfoPropType
+  };
+
   constructor(props){
     super(props);
     this.state={ data: [] }
@@ -22,6 +29,14 @@ class ShoppingCart extends Component {
     this.setState({data: newState});
   }
 
+  continueShopping(e){
+    this.props.history.push('/')
+  }
+
+  checkOutHandler(e){
+    this.props.history.push('/')
+  }
+
   render() {
     if( this.isUpdated === true ){
       // this.state.data.length === 0?
@@ -30,7 +45,7 @@ class ShoppingCart extends Component {
           <div className="row">
               <div className="col-10">
                   <div className="table-responsive">
-                      <table className="table table-striped">
+                      <table className="table ">
                           <thead>
                               <tr>
                                 <th scope="col" max-width="100"> </th>
@@ -57,15 +72,6 @@ class ShoppingCart extends Component {
                                 </tr>
                               );
                           })}
-                              
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
                       <tr>
                           <td></td>
                           <td></td>
@@ -90,19 +96,21 @@ class ShoppingCart extends Component {
                           <td className="text-right"><h3>Total</h3></td>
                           <td className="text-right"><h3><strong>$31.53</strong></h3></td>
                       </tr>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td className="text-right">
+                            <button className="btn btn-default" onClick={this.continueShopping.bind(this)}>Continue Shopping <i className="fas fa-shopping-cart"></i></button>
+                          </td>
+                          <td className="text-right">
+                            <button className="btn btn-success" onClick={this.checkOutHandler.bind(this)}>Checkout  <i className="fas fa-play"></i></button>
+                          </td>
+                      </tr>
                           </tbody>
                       </table>
                   </div>
-                <div className="col mb-2">
-                    <div className="row">
-                        <div className="col-sm-12  col-md-6">
-                            <button className="btn btn-block btn-light">Continue Shopping</button>
-                        </div>
-                        <div className="col-sm-12 col-md-6 text-right">
-                            <button className="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
-                        </div>
-                    </div>
-                </div>
               </div>
               
           </div>
@@ -116,4 +124,13 @@ class ShoppingCart extends Component {
   }
 }
 
-export default ShoppingCart;
+const mapContextToProps = context => {
+  return {
+    ...mapSessionContextToProps(context),
+    ...mapItemsToCart(context)
+  };
+};
+
+export default withRouter(
+  subscribe(ProviderContext, mapContextToProps)( ShoppingCart )
+);
