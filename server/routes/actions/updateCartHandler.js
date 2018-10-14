@@ -7,7 +7,6 @@ const updateCartHandler = async function(req, res) {
       product_id : req.body.itemId,
       quantity : 1
     }
-    console.log(cartItem);
     let connection = dbSetup.connect();
     connection.query('INSERT INTO cart SET ?', cartItem, function(error, results, fields) {
       if (error) {
