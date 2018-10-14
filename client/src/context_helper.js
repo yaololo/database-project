@@ -15,17 +15,15 @@ export function mapSessionContextToProps(context) {
 export function mapItemsToCart(context) {
   return {
     sessionCartInfo: {
-      cartItems: context.cartItems,
-      noItems: context.noItems,
-      updateItemsQty: context.actions.updateItemsQty
+      cartProductList: context.cartProductList,
+      updateCartProductList: context.actions.updateCartProductList
     }
   }
 }
 export const sessionCartInfoPropType = {
   sessionCartInfo: shape({
-    cartItems: array,
-    noItems: number,
-    updateItemsQty: func.isRequired
+    cartProductList: array,
+    updateCartProductList: func.isRequired
   })
 }
 
