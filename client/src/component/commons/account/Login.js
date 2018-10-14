@@ -5,16 +5,15 @@ import { withCookies, Cookies } from "react-cookie";
 import React, { Component } from 'react';
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
-import {
-  mapSessionContextToProps,
-  sessionContextPropType
-} from "../../../context_helper";
+import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper"
+
 
 class Login extends Component {
   static propTypes = {
     history: object.isRequired,
     cookies: instanceOf(Cookies).isRequired,
-    ...sessionContextPropType
+    ...sessionContextPropType,
+    ...sessionCartInfoPropType
   };
 
   constructor(props) {
@@ -43,7 +42,8 @@ class Login extends Component {
       history: this.props.history,
       cookies: this.props.cookies,
       from: this.getRedirectReferer(),
-      sessionContext: this.props.sessionContext
+      sessionContext: this.props.sessionContext,
+      mapItemsToCart: this.props.mapItemsToCart
     });
   }
 
@@ -110,6 +110,7 @@ class Login extends Component {
 const mapContextToProps = context => {
   return {
     ...mapSessionContextToProps(context),
+    ...mapItemsToCart(context)
   };
 };
 
