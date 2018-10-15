@@ -50,7 +50,7 @@ class Login extends Component {
       cookies: this.props.cookies,
       from: this.getRedirectReferer(),
       sessionContext: this.props.sessionContext,
-      mapItemsToCart: this.props.mapItemsToCart,
+      sessionCartInfo: this.props.sessionCartInfo,
       messageContext: this.props.messageContext
     });
   }
