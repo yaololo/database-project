@@ -1,4 +1,4 @@
-import { object, shape, func, string, array, number } from "prop-types";
+import { object, shape, func, string, array } from "prop-types";
 
 export function mapSessionContextToProps(context) {
   return {
@@ -7,7 +7,6 @@ export function mapSessionContextToProps(context) {
       user: context.user,
       saveSession: context.actions.saveSession,
       clearSession: context.actions.clearSession,
-      updateUserProfile: context.actions.updateUserProfile
     }
   };
 }
@@ -46,7 +45,6 @@ export const sessionContextPropType = {
     user: object,
     saveSession: func.isRequired,
     clearSession: func.isRequired,
-    updateUserProfile: func.isRequired
   }).isRequired
 };
 
