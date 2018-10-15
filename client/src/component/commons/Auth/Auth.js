@@ -6,11 +6,15 @@ export function login({
   cookies,
   from,
   sessionContext,
-  sessionCartInfo
+  sessionCartInfo,
+  messageContext,
 }) {
+  messageContext.clearMessages();
   return fetch("/api/user/login", {
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      'Accept': 'application/json' },
     body: JSON.stringify({
       user: {
         email: email,
@@ -20,6 +24,7 @@ export function login({
   }).then(response => {
     if (response.ok) {
       return response.json().then(json => {
+        messageContext.setSuccessMessages(json.msg);
         sessionContext.saveSession(json.token, json.user);
         cookies.set("token", json.token, {
           expires: moment()
@@ -30,7 +35,7 @@ export function login({
       });
     } else {
       return response.json().then(json => {
-        const messages = Array.isArray(json) ? json : [json];
+        messageContext.setErrorMessages(json.msg);
       });
     }
   });
@@ -44,11 +49,15 @@ export function signup({
   password,
   history,
   cookies,
-  sessionContext
+  sessionContext,
+  messageContext
 }) {
+  messageContext.clearMessages();
   return fetch("/api/user/signup", {
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      'Accept': 'application/json' },
     body: JSON.stringify({
       user: {
         firstName: firstName,
@@ -61,6 +70,7 @@ export function signup({
   }).then(response => {
     return response.json().then(json => {
       if (response.ok) {
+        messageContext.setSuccessMessages(json.msg);
         sessionContext.saveSession(json.token, json.user);
         cookies.set("token", json.token, {
           expires: moment()
@@ -69,7 +79,7 @@ export function signup({
         });
         history.push("/");
       } else {
-        const messages = Array.isArray(json) ? json : [json];
+        messageContext.setErrorMessages(json.msg);
       }
     });
   });
