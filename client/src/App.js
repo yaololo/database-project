@@ -12,7 +12,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-contextual";
 import React, { Component } from 'react';
 import { CookiesProvider } from "react-cookie";
-
 class App extends Component {
   isAuthenticated = false;
 
@@ -33,18 +32,17 @@ class App extends Component {
     return { jwtToken: null, user: {} };
   };
 
-  updateItemsQty = (noItems) =>{
-    return noItems
+  updateCartProductList = (productList) => {
+    return { cartProductList: productList}
   }
+
   store = {
-    initialState: { jwtToken: null, user: {}, messages: {} , cartItems: [], itemsId: [], noItems: 0 },
+    initialState: { jwtToken: null, user: {}, messages: {} , cartProductList: [], noItems: 0 },
     actions: {
       saveSession: this.saveSession,
       clearSession: this.clearSession,
-      updateItemsQty: this.updateItemsQty,
-      updateUserProfile: newProfile => state => ({
-        user: Object.assign(state.user, newProfile)
-      }),
+      // updateItemsQty: this.updateItemsQty,
+      updateCartProductList: this.updateCartProductList,
       clearMessages: () => ({ messages: {} }),
       setErrorMessages: errors => ({ messages: { error: errors } }),
       setSuccessMessages: success => ({ messages: { success: success } }),
@@ -84,8 +82,6 @@ class App extends Component {
                 <Route path="/signup" exact component= {SignUp} />
                 <Route path="/my_cart" exact render={() => <ShoppingCart data={this.state.data} />} />
                 <Route path="/product/:productId" exact component={DetailedPage} />
-                {/* <Route path="/myCart" exact component= {ShoppingCart} /> */}
-                {/* <this.PrivateRoute path="/account" component={Profile} /> */}
                 {/* <this.PrivateRoute path="/my_cart" component={ShoppingCart} /> */}
                 <Route path="*" component={NotFound} />
               </Switch>
@@ -114,9 +110,7 @@ class App extends Component {
         });
       } else {
         response.json().then(json =>
-          this.setState({
-            data: json.data
-          })
+         this.setErrorMessages(json.msg)
         );
       }
     });
