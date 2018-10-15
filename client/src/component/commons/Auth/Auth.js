@@ -12,9 +12,7 @@ export function login({
   messageContext.clearMessages();
   return fetch("/api/user/login", {
     method: "post",
-    headers: { 
-      "Content-Type": "application/json",
-      'Accept': 'application/json' },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       user: {
         email: email,
@@ -55,9 +53,7 @@ export function signup({
   messageContext.clearMessages();
   return fetch("/api/user/signup", {
     method: "post",
-    headers: { 
-      "Content-Type": "application/json",
-      'Accept': 'application/json' },
+    headers: { "Content-Type": "application/json"},
     body: JSON.stringify({
       user: {
         firstName: firstName,
