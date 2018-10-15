@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import { login } from "../Auth/Auth";
-
 import { withCookies, Cookies } from "react-cookie";
 import React, { Component } from 'react';
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
-import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper"
-
+import { 
+  mapSessionContextToProps, 
+  sessionContextPropType, 
+  sessionCartInfoPropType, 
+  mapItemsToCart,
+  mapMessageContextToProps,
+  messageContextPropType,
+} from "../../../context_helper"
+import Messages from '../../Message/Message';
 
 class Login extends Component {
   static propTypes = {
     history: object.isRequired,
     cookies: instanceOf(Cookies).isRequired,
     ...sessionContextPropType,
-    ...sessionCartInfoPropType
+    ...sessionCartInfoPropType,
+    ...messageContextPropType
   };
 
   constructor(props) {
@@ -43,8 +50,13 @@ class Login extends Component {
       cookies: this.props.cookies,
       from: this.getRedirectReferer(),
       sessionContext: this.props.sessionContext,
-      mapItemsToCart: this.props.mapItemsToCart
+      mapItemsToCart: this.props.mapItemsToCart,
+      messageContext: this.props.messageContext
     });
+  }
+
+  componentWillUnmount() {
+    this.props.messageContext.clearMessages();
   }
 
   render() {
@@ -52,6 +64,7 @@ class Login extends Component {
       <div className="login-container container">
         <div className="panel">
           <div className="panel-body">
+            <Messages messages={this.props.messageContext.messages} />
             <form onSubmit={this.handleLogin.bind(this)}>
               <legend>Log In</legend>
               <div className="form-group">
@@ -110,7 +123,8 @@ class Login extends Component {
 const mapContextToProps = context => {
   return {
     ...mapSessionContextToProps(context),
-    ...mapItemsToCart(context)
+    ...mapItemsToCart(context),
+    ...mapMessageContextToProps(context)
   };
 };
 
