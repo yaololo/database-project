@@ -111,5 +111,5 @@ const mapContextToProps = context => {
 };
 
 export default withRouter(
-  subscribe(ProviderContext, mapContextToProps)( Header)
+  subscribe(ProviderContext, mapContextToProps)( withCookies(Header))
 );
