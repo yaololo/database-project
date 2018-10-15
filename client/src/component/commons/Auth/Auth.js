@@ -23,6 +23,7 @@ export function login({
     if (response.ok) {
       return response.json().then(json => {
         messageContext.setSuccessMessages(json.msg);
+        sessionCartInfo.updateCartProductList(json.productList)
         sessionContext.saveSession(json.token, json.user);
         cookies.set("token", json.token, {
           expires: moment()
