@@ -1,10 +1,6 @@
 import React from "react";
-import { object } from "prop-types";
 
 class Messages extends React.Component {
-  static propTypes = {
-    messages: object.isRequired
-  };
 
   render() {
     if(this.props.messages !== undefined){
