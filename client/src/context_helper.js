@@ -20,6 +20,19 @@ export function mapItemsToCart(context) {
     }
   }
 }
+
+export function mapMessageContextToProps(context) {
+  return {
+    messageContext: {
+      messages: context.messages,
+      clearMessages: context.actions.clearMessages,
+      setSuccessMessages: context.actions.setSuccessMessages,
+      setErrorMessages: context.actions.setErrorMessages,
+      setInfoMessages: context.actions.setInfoMessages
+    }
+  };
+}
+
 export const sessionCartInfoPropType = {
   sessionCartInfo: shape({
     cartProductList: array,
@@ -37,17 +50,12 @@ export const sessionContextPropType = {
   }).isRequired
 };
 
-export const authenticatedSessionContextPropType = {
-  sessionContext: shape({
-    token: string.isRequired,
-    user: shape({
-      firstName: string,
-      lastName: string,
-      email: string.isRequired,
-      id: string.isRequired,
-      userType: string.isRequired
-    }),
-    saveSession: func.isRequired,
-    clearSession: func.isRequired
+export const messageContextPropType = {
+  messageContext: shape({
+    messages: object.isRequired,
+    clearMessages: func.isRequired,
+    setSuccessMessages: func.isRequired,
+    setErrorMessages: func.isRequired,
+    setInfoMessages: func.isRequired
   }).isRequired
 };
