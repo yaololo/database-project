@@ -56,7 +56,7 @@ const loginHandler = async function(req, res) {
                   connection.end();
                   return res.status(500).send(
                     JSON.stringify({
-                      msg: "Get shopping cart item fail11111"
+                      msg: "Get shopping cart item fail"
                     })
                   );
                 } else{
