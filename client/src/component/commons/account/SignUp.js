@@ -4,16 +4,22 @@ import { signup } from "../Auth/Auth";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
-import {
-  mapSessionContextToProps,
-  sessionContextPropType
-} from "../../../context_helper";
+import { 
+  mapSessionContextToProps, 
+  sessionContextPropType, 
+  sessionCartInfoPropType, 
+  mapItemsToCart,
+  mapMessageContextToProps,
+  messageContextPropType,
+} from "../../../context_helper"
+import Messages from '../../Message/Message';
 
 class SignUp extends React.Component {
   static propTypes = {
     history: object.isRequired,
     cookies: instanceOf(Cookies).isRequired,
-    ...sessionContextPropType
+    ...sessionContextPropType,
+    ...messageContextPropType
   };
 
   constructor(props) {
@@ -35,8 +41,13 @@ class SignUp extends React.Component {
       password: this.state.password,
       history: this.props.history,
       cookies: this.props.cookies,
-      sessionContext: this.props.sessionContext
+      sessionContext: this.props.sessionContext,
+      messageContext: this.props.messageContext,
     });
+  }
+
+  componentWillUnmount() {
+    this.props.messageContext.clearMessages();
   }
 
   render() {
@@ -44,6 +55,7 @@ class SignUp extends React.Component {
       <div className="login-container container">
         <div className="panel">
           <div className="panel-body">
+          <Messages messages={this.props.messageContext.messages} />
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
@@ -150,6 +162,7 @@ class SignUp extends React.Component {
 const mapContextToProps = context => {
   return {
     ...mapSessionContextToProps(context),
+    ...mapMessageContextToProps(context)
   };
 };
 
