@@ -18,9 +18,18 @@ const signUpHandler = async function(req, res) {
     }
     var connection = dbSetup.connect();
     connection.query(`INSERT INTO users SET ?`, postValue, function(error, results, fields) {
+      // console.log(connection);
+
       if (error) {
-        console.log(error);
-        connection.destroy();
+        console.log(error.sqlMessage)
+        connection.on('error', function() {});
+        // throw new Error(error)
+
+        // console.log(error.fatal);
+        // console.log(error.code);
+        // console.log(error.sqlMessage);
+ 
+        connection.end()
         return res.status(500).send(
           JSON.stringify({
             msg: 'Something went wrong during sign up.'
@@ -31,9 +40,14 @@ const signUpHandler = async function(req, res) {
       }
     });
 
+    connection.destroy()
     connection.query(`SELECT user_id FROM users WHERE email = ? AND password =? `, [user.email, postValue.auth], function(error, results, fields) {
       if (error) {
-        console.log(error);
+        console.log("normal" + error)
+        connection.on('error', function() {});
+        // console.log(error.fatal);
+        // console.log(error.code);
+        // console.log(error.sqlMessage);
         connection.destroy();
         return res.status(500).send(
           JSON.stringify({
@@ -54,7 +68,7 @@ const signUpHandler = async function(req, res) {
 
     connection.end();
   } catch (error) {
-    console.log(error);
+    console.log("sign up catch error" + error);
   }
 };
 
