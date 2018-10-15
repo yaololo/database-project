@@ -27,10 +27,9 @@ const signUpHandler = async function(req, res) {
             msg: 'email already exists'
           })
         );
-      } else {
-        console.log('successful');
       }
     });
+
 
     if(connection.state === 'authenticated'){
       console.log(" i am ")
@@ -40,7 +39,7 @@ const signUpHandler = async function(req, res) {
         function(error, results, fields) {
           if (error) {
             connection.on('error', function() {});
-            connection.destroy();
+            connection.end();
             return res.status(500).send(
               JSON.stringify({
                 msg: 'Something went wrong during sign up.'
