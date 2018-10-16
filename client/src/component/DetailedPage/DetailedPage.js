@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './DetailedPage.css'
 import { mapSessionContextToProps, sessionContextPropType } from "../../context_helper";
-import { updateCart } from '../utils/utils';
+import { addToCart } from '../utils/utils';
 import { ProviderContext, subscribe } from "react-contextual";
 import { withRouter } from "react-router";
 
@@ -24,11 +24,9 @@ class DetailedPage extends Component {
     if(this.props.sessionContext.user.id === undefined){
       this.props.history.push('/login')
     }else{
-      updateCart(this.props.location.state.key.product_id, this.props.sessionContext.user.id, this.state.quantity);
+      addToCart(this.props.location.state.key.product_id, this.props.sessionContext.user.id, this.state.quantity);
     }
   }
-
-
 
   render() {
     return (
