@@ -1,4 +1,4 @@
-export function updateCart (itemId, customerId, quantity){
+export function addToCart (itemId, customerId, quantity){
   fetch('/api/update_cart', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
