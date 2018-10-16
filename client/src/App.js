@@ -68,7 +68,6 @@ class App extends Component {
     />
   );
 
-
   render() {
     return (
       <Provider {...this.store}>
@@ -80,9 +79,8 @@ class App extends Component {
                 <Route path="/" exact render={() => <Home data={this.state.data} />} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component= {SignUp} />
-                <Route path="/my_cart" exact render={() => <ShoppingCart data={this.state.data} />} />
                 <Route path="/product/:productId" exact component={DetailedPage} />
-                {/* <this.PrivateRoute path="/my_cart" component={ShoppingCart} /> */}
+                <this.PrivateRoute path="/my_cart" exact component={ShoppingCart} />
                 <Route path="*" component={NotFound} />
               </Switch>
               <div>
