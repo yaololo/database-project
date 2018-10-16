@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../context_helper"
 import { ProviderContext, subscribe } from "react-contextual";
+import './ShoppingCart.css'
+
 class ShoppingCart extends Component {
   static propTypes = {
     ...sessionContextPropType,
@@ -13,19 +15,25 @@ class ShoppingCart extends Component {
     this.state={ data: [] }
     this.isUpdated = false;
   }
-  componentWillReceiveProps(nextProps) {
-      this.setState({data: nextProps.data});
+
+  onChangeHandler(product ,event){
+    event.preventDefault();
+    this.setState({ quantity: event.target.value });
+  }
+
+  updateState(e){
+    this.setState({data: this.props.sessionCartInfo.cartProductList });
   }
 
   componentDidMount(){
-    this.setState({data: this.props.data});
-    this.isUpdated = true
+    this.setState({data: this.props.sessionCartInfo.cartProductList });
+    // this.isUpdated = true
   }
 
   removeItemHandler(event){
     event.preventDefault();
-    this.state.data.splice(event.target.value, 1); 
-    let newState = this.state.data;
+    this.props.sessionCartInfo.cartProductList.splice(event.target.value, 1); 
+    let newState = this.props.sessionCartInfo.cartProductList;
     this.setState({data: newState});
   }
 
@@ -38,6 +46,10 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    if(this.props.sessionCartInfo.cartProductList.length >0 && this.isUpdated === false){
+      this.updateState();
+      this.isUpdated = true
+    }
     if( this.isUpdated === true ){
       // this.state.data.length === 0?
       return (
@@ -57,16 +69,16 @@ class ShoppingCart extends Component {
                               </tr>
                           </thead>
                           <tbody>
-                          {this.state.data.slice(0, 10).map((element, i) => {
+                          {this.state.data.map((element, i) => {
                             return (
                                 <tr key={i}>
-                                    <td width="120"><img src={element.image.split(',')[0]} alt=""/> </td>
-                                    <td>{element.p_name}</td>
+                                    <td width="120"><img src={element[0].image.split(',')[0]} alt=""/> </td>
+                                    <td>{element[0].p_name}</td>
                                     <td>In stock</td>
-                                    <td><input className="form-control" type="text" value="1" /></td>
-                                    <td className="text-right">{`$${element.unit_price}`}</td>
+                                    <td><input className="text-center cart-input-quantity" width="80" type="number" name="quantity" maxLength="4" size="4" value={element[0].quantity}/></td>
+                                    <td className="text-right">{`$${element[0].unit_price}`}</td>
                                             <td className="text-right">
-                                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(this)}>
+                                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(element[0],this)}>
                                       <i className="fas fa-trash-alt"></i> Remove
                                     </button></td>
                                 </tr>
