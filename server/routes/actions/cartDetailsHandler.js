@@ -1,33 +1,43 @@
-const dbSetup = require('../../DbConnection/setupConnection');
 
-const updateCartHandler = async function(req, res) {
+const carDetailsHandler = async function(req, res){
+  let productList = req.body.productList;
+  let productInfoList = [];
+  // let count = 0;
   try {
-    let cartItem = {
-      customer_id : req.body.customerId,
-      product_id : req.body.itemId,
-      quantity : 1
+    for(i=0 ; i< productList.length; i++){
+      let connection = dbSetup.connect();
+      connection.query('SELECT * FROM product WHERE product_id = ?', productList[i].product_id,
+      function(error, results, fields) {
+        if(error){
+          console.log(error.sqlMessage)
+          // connection.on('error', function() {} );
+          connection.end();
+          return res.status(500).send(
+            JSON.stringify({
+              msg: "Get shopping cart item fail"
+            })
+          );
+        } else{
+          // results[0].quantity = productList[i]['SUM(quantity)']
+          let productInfo = {
+            quantity: productList[i].quantity,
+            productDetails: results
+          }
+          
+          productInfoList.push(productInfo);
+          // count ++;
+          if(productList.length === productList.length){
+            return res.status(200).send(
+              JSON.stringify({
+                productInfoList: productInfoList
+              })
+            );
+          }
+        }
+      })
+      connection.end()
     }
-    let connection = dbSetup.connect();
-    connection.query('INSERT INTO cart SET ?', cartItem, function(error, results, fields) {
-      if (error) {
-        console.log(error);
-        return res.status(500).send(
-          JSON.stringify({
-            data: 'Something went wrong while while updating cart table.'
-          })
-        );
-      } else {
-        return res.status(200).send(
-          JSON.stringify({
-            msg: 'update successful'
-          })
-        );
-      }
-    });
-    connection.end();
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
-};
-
-module.exports = updateCartHandler;
+}
