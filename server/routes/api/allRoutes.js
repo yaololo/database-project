@@ -1,7 +1,7 @@
 const loginHandler = require('../actions/loginHandler');
 const signUpHandler = require('../actions/signUpHandler');
 const onLandingAction = require('../actions/onLanding');
-const updateCartHandler = require ('../actions/updateCartHandler')
+const addToCartHandler = require ('../actions/addToCartHandler')
 const handleAsyncError = require("express-async-wrap");
 const router = require('express').Router();
 
@@ -11,9 +11,9 @@ router.post('/user/signup', handleAsyncError(signUpHandler));
 
 router.post('/user/login', handleAsyncError(loginHandler));
 
-router.post('/update_cart', handleAsyncError(updateCartHandler));
+router.post('/update_cart', handleAsyncError(addToCartHandler));
 
-// router.get('/my_cart_details', cartDetailsHandler);
+router.get('/my_cart_details', cartDetailsHandler);
 
 // router.post('/getItemDetails', itemDetailsHandler);
 
