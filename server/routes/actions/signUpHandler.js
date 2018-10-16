@@ -18,49 +18,59 @@ const signUpHandler = async function(req, res) {
     }
 
     var connection = dbSetup.connect();
-    connection.query(`INSERT INTO users SET ?`, postValue, function(error, results, fields) {
-      if (error) {
-        connection.on('error', function() {} );
+    connection.query(`SELECT email FROM users`, postValue, function(error, results, fields) {
+      if(error){
+        console.log(error.sqlMessage)
         connection.end();
         return res.status(500).send(
           JSON.stringify({
             msg: 'email already exists'
           })
         );
-      }
-    });
-
-
-    if(connection.state === 'authenticated'){
-      console.log(" i am ")
-      connection.query(
-        `SELECT user_id FROM users WHERE email = ? AND password =? `,
-        [user.email, postValue.auth],
-        function(error, results, fields) {
+      } else {
+        connection.query(`INSERT INTO users SET ?`, postValue, function(error, results, fields) {
           if (error) {
-            connection.on('error', function() {});
+            // connection.on('error', function() {} );
+            console.log(error.sqlMessage)
             connection.end();
             return res.status(500).send(
               JSON.stringify({
-                msg: 'Something went wrong during sign up.'
+                msg: 'email already exists'
               })
             );
-          } else {
-            user.id = results[0].user_id;
-            return res.status(200).send(
-              JSON.stringify({
-                token: 'true',
-                user: user,
-                msg: 'Sign Up successful'
-              })
-            );
-          }
-        });
-        connection.end();
-      }
+          } else{
+            connection.query(
+              `SELECT user_id FROM users WHERE email = ? AND auth = ? `,
+              [user.email, postValue.auth],
+              function(error, results, fields) {
+                if (error) {
+                  console.log(error.sqlMessage)
+                  connection.on('error', function() {});
+                  connection.end();
+                  return res.status(500).send(
+                    JSON.stringify({
+                      msg: 'Something went wrong during sign up.'
+                    })
+                  );
+                } else {
+                  user.id = results[0].user_id;
+                  return res.status(200).send(
+                    JSON.stringify({
+                      token: 'true',
+                      user: user,
+                      msg: 'Sign Up successful'
+                    })
+                  );
+                }
+              });
+              connection.end();
+            }
+          })
+        }
+      })
   } catch (error) {
     console.log("sign up catch error" + error);
   }
-};
+}
 
 module.exports = signUpHandler;
