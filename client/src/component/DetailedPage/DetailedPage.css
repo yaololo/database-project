@@ -165,3 +165,13 @@ img {
     -webkit-transform: scale(1);
             transform: scale(1); } }
 
+
+.bookmark-icon{
+  font-size: 25px;
+  color: grey;
+  margin-left: 25%;
+}
+
+.bookmark-icon :hover{
+  cursor: pointer;
+}
