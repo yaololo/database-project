@@ -1,10 +1,15 @@
 const dbSetup = require("../../DbConnection/setupConnection");
 
-const addToCart = async function(req, res) {
+const createOrder = async function(req, res) {
   try {
     let customer_id = req.body.user.customerId;
-    let product_id = req.body.product.productId;
-    let quantity = req.body.order.quantity;
+    let address_id = req.body.customerAddress.addressId;
+    let status = 1;
+    let d = new Date();
+    let date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    let product_id_string = req.body.product.productIdString;
+    let quantity_string = req.body.order.quantityString;
+
     let token = req.body.user.token;
 
     if (token !== "true") {
@@ -17,23 +22,23 @@ const addToCart = async function(req, res) {
 
     let connection = dbSetup.connect();
 
-    let sql="CALL `addToCart`(@isAdd,?,?,?);";
+    let sql="call `createOrder`(?,?,?,?,?,?);";
 
     connection.query(
       sql,
-      [customer_id,product_id,quantity],
+      [customer_id,address_id,status,date,product_id_string,quantity_string],
       function(error, results, fields) {
         if (error) {
           console.log(error);
           return res.status(500).send(
             JSON.stringify({
-              data: "Something went wrong while while add item into cart."
+              data: "Something went wrong while create order."
             })
           );
         } else {
             return res.status(200).send(
                 JSON.stringify({
-                msg: "successful add item in to cart."
+                msg: "successful create order."
                 })
             );
         }
@@ -45,4 +50,4 @@ const addToCart = async function(req, res) {
   }
 };
 
-module.exports = addToCart;
+module.exports = createOrder;

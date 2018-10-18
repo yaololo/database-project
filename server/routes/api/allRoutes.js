@@ -97,7 +97,8 @@ const bookMarkItem = require("../actions/bookMarkItem");
 const deleteBookMarkItem = require("../actions/deleteBookMarkItem");
 const addFeedback = require("../actions/addFeedback");
 const selectByBrand = require("../actions/selectByBrand");
-
+const createOrder = require("../actions/createOrder");
+const custOrderHist = require("../actions/custOrderHist");
 
 router.delete('/delete_cart_on_checkout', deleteItemsOnCheckout);
 
@@ -112,3 +113,7 @@ router.delete("/delete_bookmark_item",deleteBookMarkItem);
 router.post("/add_feedback",addFeedback);
 
 router.get("/select_by_brand",selectByBrand);
+
+router.post("/create_order",createOrder);
+
+router.get("/cust_order_hist",custOrderHist);
