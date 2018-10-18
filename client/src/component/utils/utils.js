@@ -16,17 +16,18 @@ export function addToCart (itemId, customerId, quantity){
   });
 }
 
-export function getItemDetails(itemId, cartItems){
-  fetch('/api/getItemDetails', {
-    method: 'get',
+export function getItemDetails(productList, token, cartSessionInfo){
+  fetch('/api/my_cart_details', {
+    method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      itemId: itemId 
+      token: token,
+      productList: productList 
     })
   }).then(response => {
     if (response.ok) {
       response.json().then(json => {
-        cartItems.push(json.itemDetails)
+        cartSessionInfo.updateCartProductInfoList(json.productInfoList)
       });
     } else {
       console.log('something wrong during getting product details');
