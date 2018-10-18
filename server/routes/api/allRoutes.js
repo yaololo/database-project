@@ -145,3 +145,6 @@ router.post("/update_profile_info",updateProfileInfo);
 
 
 module.exports = router;
+router.post("/create_order",createOrder);
+
+router.get("/cust_order_hist",custOrderHist);
