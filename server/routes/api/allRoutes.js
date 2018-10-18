@@ -18,9 +18,7 @@ router.post('/update_cart', handleAsyncError(addToCartHandler));
 
 router.post('/my_cart_details', cartDetailsHandler);
 
-// router.post('/getItemDetails', itemDetailsHandler);
 
-module.exports = router;
 
 
 
@@ -144,3 +142,6 @@ router.get("/view_feedback_of_a_product",viewFeedbackOfAProduct);
 router.post("/cancel_order",cancelOrder);
 
 router.post("/update_profile_info",updateProfileInfo);
+
+
+module.exports = router;
