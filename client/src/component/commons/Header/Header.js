@@ -33,7 +33,7 @@ class Header extends React.Component {
           <li className="nav-item">
               <a className="nav-link shopping-cart" onClick={this.goToCart.bind(this)}>
                 <i className="fas fa-shopping-cart">
-                  <span className="badge badge-danger">{this.props.sessionCartInfo.noItems}</span>
+                  <span className="badge badge-danger">{this.props.sessionCartInfo.noOfItems}</span>
                 </i>
               </a>
             </li>

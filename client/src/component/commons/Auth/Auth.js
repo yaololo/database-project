@@ -21,9 +21,14 @@ export function login({
     })
   }).then(response => {
     if (response.ok) {
+      let quantity = 0;
       return response.json().then(json => {
+        for(let i = 0; i< json.productList.length; i++ ){
+          quantity += json.productList[i].quantity;
+        }
         messageContext.setSuccessMessages(json.msg);
-        sessionCartInfo.updateCartProductList(json.productList)
+        sessionCartInfo.updateCartProductList(json.productList);
+        sessionCartInfo.updateNoOfItemInCart(quantity)
         sessionContext.saveSession(json.token, json.user);
         cookies.set("token", json.token, {
           expires: moment()
