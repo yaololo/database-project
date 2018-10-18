@@ -1,8 +1,13 @@
+const dbSetup = require('../../DbConnection/setupConnection');
 
-const carDetailsHandler = async function(req, res){
+const cartDetailsHandler = async function(req, res){
+
+  if( req.body.token !== 'true' || req.body.productList.length === 0){
+    return;
+  }
   let productList = req.body.productList;
   let productInfoList = [];
-  // let count = 0;
+  let count = 0;
   try {
     for(i=0 ; i< productList.length; i++){
       let connection = dbSetup.connect();
@@ -18,15 +23,15 @@ const carDetailsHandler = async function(req, res){
             })
           );
         } else{
-          // results[0].quantity = productList[i]['SUM(quantity)']
+
           let productInfo = {
-            quantity: productList[i].quantity,
+            quantity: productList[count].quantity,
             productDetails: results
           }
           
           productInfoList.push(productInfo);
-          // count ++;
-          if(productList.length === productList.length){
+          count ++;
+          if(count === productList.length){
             return res.status(200).send(
               JSON.stringify({
                 productInfoList: productInfoList
@@ -41,3 +46,5 @@ const carDetailsHandler = async function(req, res){
     console.log(error)
   }
 }
+
+module.exports= cartDetailsHandler;

@@ -7,7 +7,7 @@ const loginHandler = async function(req, res) {
       email: req.body.user.email,
       password: req.body.user.password.toString(),
     }
-  
+
     var connection = dbSetup.connect();
     connection.query('SELECT user_id, first_name, last_name, email, user_type FROM `users` WHERE `email`= ? AND `auth` = ?;', [user.email, user.password], function(error, results, fields) {
       if (error) {
@@ -38,7 +38,7 @@ const loginHandler = async function(req, res) {
 
         // let connection = dbSetup.connect();
         
-        connection.query('SELECT product_id, SUM(quantity) FROM cart WHERE customer_id = ? GROUP BY product_id', user.id,
+        connection.query('SELECT product_id, quantity FROM cart WHERE customer_id = ? GROUP BY product_id', user.id,
         function(error, results, fields) {
           if(error){
             console.log(error.sqlMessage)
@@ -61,16 +61,15 @@ const loginHandler = async function(req, res) {
               )
             }
             
-            let productList = {
-              product_id: results[0],
-              quantity: result[0]['SUM(quantity)']
-            };
+
+            let productList = results;
+
             return res.status(200).send(
               JSON.stringify({
                 msg: "login successful",
                 token: "true",
                 user: user,
-                productList: productList
+                productList: productList,
               })
             )
           }
