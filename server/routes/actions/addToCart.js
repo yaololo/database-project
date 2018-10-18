@@ -2,10 +2,10 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const addToCart = async function(req, res) {
   try {
-    let customer_id = req.body.user.customerId;
-    let product_id = req.body.product.productId;
-    let quantity = req.body.order.quantity;
-    let token = req.body.user.token;
+    let customer_id = req.body.customerId;
+    let product_id = req.body.productId;
+    let quantity = req.body.quantity;
+    let token = req.body.token;
 
     if (token !== "true") {
       return res.status(500).send(
@@ -31,11 +31,11 @@ const addToCart = async function(req, res) {
             })
           );
         } else {
-            return res.status(200).send(
-                JSON.stringify({
-                msg: "successful add item in to cart."
-                })
-            );
+          return res.status(200).send(
+              JSON.stringify({
+              msg: "successful add item in to cart."
+            })
+          );
         }
       }
     );

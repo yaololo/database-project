@@ -7,6 +7,7 @@ import NotFound from './component/commons/404NotFound/NotFound';
 import Home from './component/commons/Home/Home';
 import DetailedPage from './component/DetailedPage/DetailedPage';
 import ShoppingCart from './component/ShoppingCart/ShoppingCart';
+import Profile from './component/commons/account/Profile' 
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-contextual";
@@ -87,6 +88,7 @@ class App extends Component {
               <Header />
               <Switch>
                 <Route path="/" exact render={() => <Home data={this.state.data} />} />
+                <this.PrivateRoute path="/account" component={Profile} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component= {SignUp} />
                 <Route path="/product/:productId" exact component={DetailedPage} />

@@ -1,17 +1,24 @@
-export function addToCart (itemId, customerId, quantity){
-  fetch('/api/update_cart', {
+export function addToCart (itemId, sessionContext, quantity, messageContext, cartInfoContext){
+  fetch('/api/add_to_cart', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      itemId: itemId,
-      customerId: customerId,
-      quantity: quantity
+      productId: itemId,
+      customerId: sessionContext.user.id,
+      quantity: quantity,
+      token: sessionContext.token
     })
   }).then(response => {
     if (response.ok) {
-      console.log('successfully add to cart');
+      cartInfoContext.noOfItems += quantity;
+      cartInfoContext.updateNoOfItemInCart(cartInfoContext.noOfItems);
+      response.json().then(json => {
+        messageContext.setSuccessMessages(json.msg)
+      })
     } else {
-      console.log('something wrong during updating cart table');
+      response.json().then(json => {
+        messageContext.setErrorMessages(json.msg)
+      })
     }
   });
 }

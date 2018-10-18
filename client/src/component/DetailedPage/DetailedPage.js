@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import './DetailedPage.css'
-import { mapSessionContextToProps, sessionContextPropType } from "../../context_helper";
+import {   
+  mapSessionContextToProps, 
+  sessionContextPropType, 
+  sessionCartInfoPropType, 
+  mapItemsToCart,
+  mapMessageContextToProps,
+  messageContextPropType,
+} from "../../context_helper";
 import { addToCart } from '../utils/utils';
 import { ProviderContext, subscribe } from "react-contextual";
 import { withRouter } from "react-router";
-
+import Messages from '../Message/Message';
 class DetailedPage extends Component {
   static propTypes = {
-    ...sessionContextPropType
+    ...sessionContextPropType,
+    ...messageContextPropType,
+    ...sessionCartInfoPropType
   };
 
   constructor(){
@@ -21,18 +30,24 @@ class DetailedPage extends Component {
   }
 
   addToCartHandler(event){
+    this.props.messageContext.clearMessages();
     if(this.props.sessionContext.user.id === undefined){
       this.props.history.push('/login')
     }else{
-      addToCart(this.props.location.state.key.product_id, this.props.sessionContext.user.id, this.state.quantity);
+      addToCart(this.props.location.state.key.product_id, this.props.sessionContext, this.state.quantity, this.props.messageContext, this.props.sessionCartInfo);
+
     }
+  }
+  
+  componentWillUnmount() {
+    this.props.messageContext.clearMessages();
   }
 
   render() {
-
     return (
     <div className="container">
       <div className="card">
+     <Messages messages={this.props.messageContext.messages} />
         <div className="container-fliud">
           <div className="wrapper row">
             <div className="preview col-md-6">
@@ -49,21 +64,15 @@ class DetailedPage extends Component {
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star"></span>
                   <span className="fa fa-star"></span>
-                  <span className="bookmark-icon"><i className="far fa-heart"> </i></span>
                 </div>
                 
               </div>
               <p className="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
               <p className="product-description">Suspendisse quos? Tempus cras iure temporibuctus posuere.</p>
-              <h4 className="price">current price: <span>${this.props.location.state.key.unit_price}</span></h4>
+              <h4 className="price">current price: <span>${this.props.location.state.key.unit_price}</span>
+              </h4>
               <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
               <div></div>
-              {/* <h5 className="sizes">sizes:
-                <span className="size" data-toggle="tooltip" title="small">s</span>
-                <span className="size" data-toggle="tooltip" title="medium">m</span>
-                <span className="size" data-toggle="tooltip" title="large">l</span>
-                <span className="size" data-toggle="tooltip" title="xtra large">xl</span>
-              </h5> */}
               <h5 className="colors">colors:
                 <span className="color orange" data-toggle="tooltip" title="Not In store"></span>
                 <span className="color green"></span>
@@ -75,7 +84,7 @@ class DetailedPage extends Component {
               </div>
               <div className="action">
                 <button className="add-to-cart btn btn-default" type="button" onClick={this.addToCartHandler.bind(this)}>add to cart</button>
-                
+                <button class="like btn btn-default bookmark-icon" type="button"><span class="fa fa-heart "></span></button>
               </div>
             </div>
           </div>
@@ -89,6 +98,8 @@ class DetailedPage extends Component {
 const mapContextToProps = context => {
   return {
     ...mapSessionContextToProps(context),
+    ...mapMessageContextToProps(context),
+    ...mapItemsToCart(context)
   };
 };
 

@@ -25,7 +25,7 @@ class Header extends React.Component {
         <ul className="nav navbar-nav navbar-left">
           <li>
             <NavLink exact to="/" activeStyle={active}>
-              Landing Page
+              Home Page
             </NavLink>
           </li>
         </ul>
@@ -48,7 +48,7 @@ class Header extends React.Component {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <Link to="/">My Account</Link>
+                <Link to="/account">My Account</Link>
               </li>
               <li className="divider" />
               <li>

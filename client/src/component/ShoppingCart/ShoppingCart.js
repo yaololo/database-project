@@ -60,9 +60,9 @@ class ShoppingCart extends Component {
   }
 
   removeItemHandler(event){
-    event.preventDefault();
-    this.props.sessionCartInfo.cartProductList.splice(event.target.value, 1); 
-    let newState = this.props.sessionCartInfo.cartProductList;
+    // event.preventDefault();
+    this.props.sessionCartInfo.cartProductInfoList.splice(event.target.value, 1); 
+    let newState = this.props.sessionCartInfo.cartProductInfoList;
     this.setState({data: newState});
   }
 
