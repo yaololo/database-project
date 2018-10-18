@@ -36,13 +36,23 @@ class App extends Component {
     return { cartProductList: productList}
   }
 
+  updateCartProductInfoList = (productInfoList) => {
+    return { cartProductInfoList: productInfoList }
+  } 
+
+  updateNoOfItemInCart = (noOfItems) => {
+    return { noOfItems: noOfItems }
+  }
+
   store = {
-    initialState: { jwtToken: null, user: {}, messages: {} , cartProductList: [], noItems: 0 },
+    initialState: { jwtToken: null, user: {}, messages: {} , cartProductList: [], noOfItems: 0 , cartProductInfoList: [] },
     actions: {
       saveSession: this.saveSession,
       clearSession: this.clearSession,
-      // updateItemsQty: this.updateItemsQty,
+      updateItemsQty: this.updateItemsQty,
       updateCartProductList: this.updateCartProductList,
+      updateNoOfItemInCart: this.updateNoOfItemInCart,
+      updateCartProductInfoList: this.updateCartProductInfoList,
       clearMessages: () => ({ messages: {} }),
       setErrorMessages: errors => ({ messages: { error: errors } }),
       setSuccessMessages: success => ({ messages: { success: success } }),
