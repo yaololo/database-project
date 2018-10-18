@@ -92,8 +92,6 @@ module.exports = router;
 
 
 
-const deleteItemsOnCheckout = require("../actions/deleteItemsOnCheckout");
-const selectByCategory = require("../actions/selectByCategory");
 const addToCart = require("../actions/addToCart");
 const bookMarkItem = require("../actions/bookMarkItem");
 const deleteBookMarkItem = require("../actions/deleteBookMarkItem");
