@@ -29,6 +29,7 @@ class DetailedPage extends Component {
   }
 
   render() {
+
     return (
     <div className="container">
       <div className="card">
@@ -48,8 +49,9 @@ class DetailedPage extends Component {
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star"></span>
                   <span className="fa fa-star"></span>
+                  <span className="bookmark-icon"><i className="far fa-heart"> </i></span>
                 </div>
-                <span className="review-no"></span>
+                
               </div>
               <p className="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
               <p className="product-description">Suspendisse quos? Tempus cras iure temporibuctus posuere.</p>
@@ -73,6 +75,7 @@ class DetailedPage extends Component {
               </div>
               <div className="action">
                 <button className="add-to-cart btn btn-default" type="button" onClick={this.addToCartHandler.bind(this)}>add to cart</button>
+                
               </div>
             </div>
           </div>
