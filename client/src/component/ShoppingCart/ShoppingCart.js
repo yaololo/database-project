@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../context_helper"
 import { ProviderContext, subscribe } from "react-contextual";
-import './ShoppingCart.css'
+import './ShoppingCart.css';
+import { getItemDetails } from "../utils/utils";
 
 class ShoppingCart extends Component {
   static propTypes = {
@@ -14,7 +15,40 @@ class ShoppingCart extends Component {
     super(props);
     this.state={ data: [] }
     this.isUpdated = false;
+    this.isFetched = false;
+    this.isStateUpdated = false;
   }
+
+  componentWillUpdate(){
+
+  }
+
+  componentWillMount(){
+    if(this.props.sessionContext.token === 'true' && this.isFetched === false){
+      console.log('fetch within will mount')
+      getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
+      this.isFetched= true;
+    }
+    // console.log('will mount')
+    // console.log(this.props.sessionCartInfo.noOfItems)
+    // console.log(this.props.sessionCartInfo.cartProductInfoList)
+    // console.log(this.props.sessionContext.token)
+  }
+
+  componentDidUpdate(){
+    if(this.isFetched === true && this.props.sessionCartInfo.noOfItems > 0 && this.isUpdated === false){
+      if(this.props.sessionCartInfo.cartProductInfoList.length > 0){
+        this.setState({data: this.props.sessionCartInfo.cartProductInfoList });
+        this.isUpdated = true;
+      }
+    }
+
+    if( this.props.sessionContext.token === 'true' && this.isFetched === false){
+      getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
+      this.isFetched = true;
+    }
+  }
+
 
   onChangeHandler(product ,event){
     event.preventDefault();
@@ -23,11 +57,6 @@ class ShoppingCart extends Component {
 
   updateState(e){
     this.setState({data: this.props.sessionCartInfo.cartProductList });
-  }
-
-  componentDidMount(){
-    this.setState({data: this.props.sessionCartInfo.cartProductList });
-    // this.isUpdated = true
   }
 
   removeItemHandler(event){
@@ -46,11 +75,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    if(this.props.sessionCartInfo.cartProductList.length >0 && this.isUpdated === false){
-      this.updateState();
-      this.isUpdated = true
-    }
-    if( this.isUpdated === true ){
+    if( this.state.data.length !== 0 && this.isUpdated === true){
       // this.state.data.length === 0?
       return (
         <div className="container cart-card">
@@ -72,11 +97,11 @@ class ShoppingCart extends Component {
                           {this.state.data.map((element, i) => {
                             return (
                                 <tr key={i}>
-                                    <td width="120"><img src={element[0].image.split(',')[0]} alt=""/> </td>
-                                    <td>{element[0].p_name}</td>
+                                    <td width="120"><img src={element.productDetails[0].image.split(',')[0]} alt=""/> </td>
+                                    <td>{element.productDetails[0].p_name}</td>
                                     <td>In stock</td>
-                                    <td><input className="text-center cart-input-quantity" width="80" type="number" name="quantity" maxLength="4" size="4" value={element[0].quantity}/></td>
-                                    <td className="text-right">{`$${element[0].unit_price}`}</td>
+                                    <td><input className="text-center cart-input-quantity" width="80" type="number" name="quantity" maxLength="4" size="4" value={element.quantity}/></td>
+                                    <td className="text-right">{`$${element.productDetails[0].unit_price}`}</td>
                                             <td className="text-right">
                                     <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(element[0],this)}>
                                       <i className="fas fa-trash-alt"></i> Remove
@@ -130,7 +155,10 @@ class ShoppingCart extends Component {
       );
     }else {
       return (
-        <div>not ready</div>
+        <div className="container text-center">
+          <h1>Your Cart is empty.</h1>
+          <button className="btn btn-default" onClick={this.continueShopping.bind(this)}>Continue Shopping <i className="fas fa-shopping-cart"></i></button>
+        </div>
       )
     }
   }
