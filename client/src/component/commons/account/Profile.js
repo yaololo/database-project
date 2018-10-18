@@ -1,171 +1,73 @@
-import React from "react";
-
-import { object, instanceOf } from "prop-types";
-import { ProviderContext, subscribe } from "react-contextual";
-
-
-class Profile extends React.Component {
-  static propTypes = {
-    history: object.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: props.sessionContext.user.email,
-      password: "",
-      confirm: ""
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      email: nextProps.sessionContext.user.email,
-    };
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-
+import React, { Component } from 'react';
+import './Profile.css'
+class Profile extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="panel">
-          <div className="panel-body">
-            <form
-              className="form-horizontal"
-            >
-              <legend>Profile Information</legend>
-              <div className="form-group">
-                <h4 htmlFor="email" className="col-sm-3">
-                  Email
-                </h4>
-                <div className="col-sm-7">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="form-control"
-                    value={this.state.email}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <h4 htmlFor="name" className="col-sm-3">
-                  Name
-                </h4>
-                <div className="col-sm-7">
-                  <input
-                    data-cy="profile-name"
-                    type="text"
-                    name="name"
-                    id="name"
-                    className="form-control"
-                    value={this.state.name}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <h4 className="col-sm-3">Gravatar</h4>
-                <div className="col-sm-4">
-                  {/* <img
-                    src={this.state.gravatar}
-                    width="100"
-                    height="100"
-                    className="profile"
-                    alt="avatar"
-                  /> */}
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    data-cy="update-profile"
-                  >
-                    Update Profile
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+      <div>
+        <div class="side-menu">
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="side-menu-container">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-plane"></span> Active Link</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-cloud"></span> Link</a></li>
+
+                <li class="panel panel-default" id="dropdown">
+                  <a data-toggle="collapse" href="#dropdown-lvl1">
+                    <span class="glyphicon glyphicon-user"></span> Sub Level <span class="caret"></span>
+                  </a>
+
+                  <div id="dropdown-lvl1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+
+                      
+                        <li class="panel panel-default" id="dropdown">
+                          <a data-toggle="collapse" href="#dropdown-lvl2">
+                            <span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span>
+                          </a>
+                          <div id="dropdown-lvl2" class="panel-collapse collapse">
+                            <div class="panel-body">
+                              <ul class="nav navbar-nav">
+                                <li><a href="#">Link</a></li>
+                                <li><a href="#">Link</a></li>
+                                <li><a href="#">Link</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+
+                <li><a href="#"><span class="glyphicon glyphicon-signal"></span> Link</a></li>
+
+              </ul>
+            </div>
+          </nav>
         </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form
-              className="form-horizontal"
-            >
-              <legend>Change Password</legend>
-              <div className="form-group">
-                <h4 htmlFor="password" className="col-sm-3">
-                  New Password
-                </h4>
-                <div className="col-sm-7">
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="form-control"
-                    value={this.state.password}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <h4 htmlFor="confirm" className="col-sm-3">
-                  Confirm Password
-                </h4>
-                <div className="col-sm-7">
-                  <input
-                    type="password"
-                    name="confirm"
-                    id="confirm"
-                    className="form-control"
-                    value={this.state.confirm}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-4 col-sm-offset-3">
-                  <button type="submit" className="btn btn-success">
-                    Change Password
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+  		  <div class="col-md-10 content">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Dashboard
+            </div>
+            <div class="panel-body">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form
-              className="form-horizontal"
-            >
-              <legend>Delete Account</legend>
-              <div className="form-group">
-                <p className="col-sm-offset-3 col-sm-9">
-                  You can delete your account, but keep in mind this action is
-                  irreversible.
-                </p>
-                <div className="col-sm-offset-3 col-sm-9">
-                  <button type="submit" className="btn btn-danger">
-                    Delete my account
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
-        </div>
+        </div>  		
       </div>
     );
   }
 }
 
-export default subscribe(ProviderContext)(
-  Profile
-);
+export default Profile;
