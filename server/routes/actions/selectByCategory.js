@@ -6,7 +6,7 @@ const selectByCategory = async function(req, res) {
 
     var connection = dbSetup.connect();
     let selectQuery =
-      "SELECT p.p_name,p.description,unit_price FROM product p,category c WHERE p.category_id = c.category_id AND c.category_id = ? ORDER BY p.p_name ASC;";
+      "SELECT p.p_name,p.description,unit_price,c.category_name FROM product p,category c WHERE p.category_id = c.category_id AND c.category_id = ? ORDER BY p.p_name ASC;";
 
     connection.query(selectQuery, category_id, function(
       error,

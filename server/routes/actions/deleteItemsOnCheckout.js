@@ -2,7 +2,7 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const deleteItemsOnCheckout = async function(req, res) {
   try {
-    let customer_id = req.body.user.customer_id;
+    let customer_id = req.body.user.customerId;
     let token = req.body.user.token;
 
     if (token !== "true") {
