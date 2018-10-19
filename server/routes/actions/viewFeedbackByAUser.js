@@ -1,18 +1,16 @@
 const dbSetup = require("../../DbConnection/setupConnection");
 
-const selectByCategory = async function(req, res) {
+const viewFeedbackByAUser = async function(req, res) {
   try {
-    let category_id = req.body.category.categoryId;
+    let customer_id = req.body.user.customerId;
 
     var connection = dbSetup.connect();
-    let selectQuery =
-      "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image "+ 
-      "FROM product p "+ 
-        "INNER JOIN category c ON c.category_id = p.category_id "+
-        "INNER JOIN brand b ON p.brand_id = b.brand_id "+ 
-      "WHERE c.category_id = ? ORDER BY p.p_name ASC;";
+    let sql =
+      "SELECT p.p_name,f.fb_date,f.content,f.rating "+
+      "FROM product p,feedback f,users u "+
+      "WHERE p.product_id=f.product_id AND f.customer_id = u.user_id AND u.user_id = ?;";
 
-    connection.query(selectQuery, category_id, function(
+    connection.query(sql, customer_id, function(
       error,
       results,
       fields
@@ -38,4 +36,4 @@ const selectByCategory = async function(req, res) {
   }
 };
 
-module.exports = selectByCategory;
+module.exports = viewFeedbackByAUser;

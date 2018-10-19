@@ -1,18 +1,14 @@
 const dbSetup = require("../../DbConnection/setupConnection");
 
-const selectByCategory = async function(req, res) {
+const viewOneSpecifiedOrderDetail = async function(req, res) {
   try {
-    let category_id = req.body.category.categoryId;
+    let order_id = req.body.order.orderId;
 
+    let space=" ";
     var connection = dbSetup.connect();
-    let selectQuery =
-      "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image "+ 
-      "FROM product p "+ 
-        "INNER JOIN category c ON c.category_id = p.category_id "+
-        "INNER JOIN brand b ON p.brand_id = b.brand_id "+ 
-      "WHERE c.category_id = ? ORDER BY p.p_name ASC;";
+    let sql = "CALL `viewOneSpecifiedOrderDetail`(?);"
 
-    connection.query(selectQuery, category_id, function(
+    connection.query(sql, order_id, function(
       error,
       results,
       fields
@@ -38,4 +34,4 @@ const selectByCategory = async function(req, res) {
   }
 };
 
-module.exports = selectByCategory;
+module.exports = viewOneSpecifiedOrderDetail;

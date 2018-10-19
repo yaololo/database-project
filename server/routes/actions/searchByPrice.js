@@ -1,18 +1,19 @@
 const dbSetup = require("../../DbConnection/setupConnection");
 
-const selectByCategory = async function(req, res) {
+const selectByPrice = async function(req, res) {
   try {
-    let category_id = req.body.category.categoryId;
+    let lower_bound = req.body.product.priceLowerBound;
+    let upper_bound = req.body.product.priceUpperBound;
 
     var connection = dbSetup.connect();
-    let selectQuery =
+    let sql =
       "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image "+ 
-      "FROM product p "+ 
-        "INNER JOIN category c ON c.category_id = p.category_id "+
-        "INNER JOIN brand b ON p.brand_id = b.brand_id "+ 
-      "WHERE c.category_id = ? ORDER BY p.p_name ASC;";
+      "FROM product p "+
+          "INNER JOIN category c ON p.category_id =c.category_id "+
+          "INNER JOIN brand b ON p.brand_id = b.brand_id "+
+      "WHERE unit_price BETWEEN ? and ? ORDER BY unit_price ASC;";
 
-    connection.query(selectQuery, category_id, function(
+    connection.query(sql, [lower_bound,upper_bound], function(
       error,
       results,
       fields
@@ -38,4 +39,4 @@ const selectByCategory = async function(req, res) {
   }
 };
 
-module.exports = selectByCategory;
+module.exports = selectByPrice;
