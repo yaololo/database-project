@@ -1,7 +1,6 @@
 const loginHandler = require('../actions/loginHandler');
 const signUpHandler = require('../actions/signUpHandler');
 const onLandingAction = require('../actions/onLanding');
-const addToCartHandler = require ('../actions/addToCartHandler')
 const handleAsyncError = require("express-async-wrap");
 const deleteItemsOnCheckout = require("../actions/deleteItemsOnCheckout");
 const selectByCategory = require("../actions/selectByCategory");
@@ -10,13 +9,13 @@ const router = require('express').Router();
 
 router.get('/hot_items', handleAsyncError(onLandingAction));
 
-router.get('/user/signup', handleAsyncError(signUpHandler));
+router.post('/user/signup', handleAsyncError(signUpHandler));
 
 router.post('/user/login', handleAsyncError(loginHandler));
 
-router.post('/update_cart', handleAsyncError(addToCartHandler));
+router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
 
-router.post('/my_cart_details', cartDetailsHandler);
+router.post('/user/place_order', handleAsyncError(loginHandler))
 
 
 
@@ -121,8 +120,6 @@ router.post("/add_feedback",addFeedback);
 
 router.get("/select_by_brand",selectByBrand);
 
-router.post("/create_order",createOrder);
-
 router.get("/cust_order_hist",custOrderHist);
 
 router.get("/search_by_keyword",searchByKeyword);
@@ -143,8 +140,6 @@ router.post("/cancel_order",cancelOrder);
 
 router.post("/update_profile_info",updateProfileInfo);
 
-
-module.exports = router;
 router.post("/create_order",createOrder);
 
-router.get("/cust_order_hist",custOrderHist);
+module.exports = router;
