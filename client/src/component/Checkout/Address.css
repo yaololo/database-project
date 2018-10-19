@@ -1,0 +1,22 @@
+.address-country-city-input{
+  display: grid;
+  grid-template-columns: 50% 50%
+}
+
+.address-country{
+  padding-right: 10px
+};
+
+.address-city{
+  padding-left: 10px
+}
+
+.address-postcode-input{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.address-contact-receiver-input{
+  display: grid;
+  grid-template-columns: 50% 50%
+}
