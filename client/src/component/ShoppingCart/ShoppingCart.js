@@ -19,31 +19,29 @@ class ShoppingCart extends Component {
     this.isStateUpdated = false;
   }
 
-  componentWillUpdate(){
-
-  }
-
   componentWillMount(){
     if(this.props.sessionContext.token === 'true' && this.isFetched === false){
-      console.log('fetch within will mount')
+      console.log('rendered by will mount')
       getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
       this.isFetched= true;
     }
-    // console.log('will mount')
-    // console.log(this.props.sessionCartInfo.noOfItems)
-    // console.log(this.props.sessionCartInfo.cartProductInfoList)
-    // console.log(this.props.sessionContext.token)
   }
 
   componentDidUpdate(){
+    console.log('did updated shows up');
+    console.log(this.props.sessionCartInfo.noOfItems)
     if(this.isFetched === true && this.props.sessionCartInfo.noOfItems > 0 && this.isUpdated === false){
+      console.log('within first if')
+      console.log(this.props.sessionCartInfo.cartProductInfoList.length)
       if(this.props.sessionCartInfo.cartProductInfoList.length > 0){
+        console.log("updated by did updated")
         this.setState({data: this.props.sessionCartInfo.cartProductInfoList });
         this.isUpdated = true;
       }
     }
 
     if( this.props.sessionContext.token === 'true' && this.isFetched === false){
+      console.log('fetched by did update')
       getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
       this.isFetched = true;
     }
@@ -55,12 +53,8 @@ class ShoppingCart extends Component {
     this.setState({ quantity: event.target.value });
   }
 
-  updateState(e){
-    this.setState({data: this.props.sessionCartInfo.cartProductList });
-  }
-
   removeItemHandler(event){
-    // event.preventDefault();
+    event.preventDefault();
     this.props.sessionCartInfo.cartProductInfoList.splice(event.target.value, 1); 
     let newState = this.props.sessionCartInfo.cartProductInfoList;
     this.setState({data: newState});
@@ -71,12 +65,25 @@ class ShoppingCart extends Component {
   }
 
   checkOutHandler(e){
-    this.props.history.push('/')
+    this.props.history.push({
+      pathname:`/checkout/address`,
+      state:{
+          productInfoList: this.props.sessionCartInfo.cartProductInfoList,
+          userInfo: this.props.sessionContext.user
+       }
+     });
   }
 
   render() {
+    if(this.props.sessionCartInfo.noOfItems <= 0){
+      return (   
+        <div className="container text-center">
+          <h1>Your Cart is empty.</h1>
+          <button className="btn btn-default" onClick={this.continueShopping.bind(this)}>Continue Shopping <i className="fas fa-shopping-cart"></i></button>
+        </div>
+      )
+    }
     if( this.state.data.length !== 0 && this.isUpdated === true){
-      // this.state.data.length === 0?
       return (
         <div className="container cart-card">
           <div className="row">
@@ -103,7 +110,7 @@ class ShoppingCart extends Component {
                                     <td><input className="text-center cart-input-quantity" width="80" type="number" name="quantity" maxLength="4" size="4" value={element.quantity}/></td>
                                     <td className="text-right">{`$${element.productDetails[0].unit_price}`}</td>
                                             <td className="text-right">
-                                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(element[0],this)}>
+                                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(this)}>
                                       <i className="fas fa-trash-alt"></i> Remove
                                     </button></td>
                                 </tr>
