@@ -19,7 +19,7 @@ const deleteItemsOnCheckout = async function(req, res) {
       customer_id,
       function(error, results, fields) {
         if (error) {
-          console.log(error);
+          console.log(error.sqlMessage);
           return res.status(500).send(
             JSON.stringify({
               data: "Something went wrong while while deleting item from cart."

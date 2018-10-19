@@ -2,7 +2,7 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const createOrder = async function(req, res) {
   try {
-    let customer_id = req.body.user.customerId;
+    let customer_id = req.body.customerId;
     let address_id = req.body.customerAddress.addressId;
     let status = 1;
     let d = new Date();

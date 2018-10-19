@@ -2,10 +2,11 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const bookMarkItem = async function(req, res) {
   try {
-    let customer_id = req.body.user.customerId;
-    let product_id = req.body.product.productId;
-    let token = req.body.user.token;
+    let customer_id = req.body.customerId
+    let product_id = req.body.productId;
+    let token = req.body.token;
 
+    console.log('I am being called')
     if (token !== "true") {
       return res.status(500).send(
         JSON.stringify({
