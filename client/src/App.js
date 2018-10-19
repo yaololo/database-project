@@ -8,6 +8,8 @@ import Home from './component/commons/Home/Home';
 import DetailedPage from './component/DetailedPage/DetailedPage';
 import ShoppingCart from './component/ShoppingCart/ShoppingCart';
 import Profile from './component/commons/account/Profile' 
+import Address from './component/Checkout/Address';
+import CheckOutConfirmation from './component/Checkout/CheckOutConfirmation';
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-contextual";
@@ -88,7 +90,10 @@ class App extends Component {
               <Header />
               <Switch>
                 <Route path="/" exact render={() => <Home data={this.state.data} />} />
+                <Route path="/confirm_checkout" exact component= {CheckOutConfirmation} />
                 <this.PrivateRoute path="/account" component={Profile} />
+                <this.PrivateRoute path="/checkout/address" component={Address} />
+                <this.PrivateRoute path="/checkout/confirm_checkout" component={CheckOutConfirmation} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component= {SignUp} />
                 <Route path="/product/:productId" exact component={DetailedPage} />
@@ -120,7 +125,7 @@ class App extends Component {
         });
       } else {
         response.json().then(json =>
-         this.setErrorMessages(json.msg)
+          console.log('app crash')
         );
       }
     });
