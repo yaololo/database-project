@@ -8,7 +8,7 @@ import {
   mapMessageContextToProps,
   messageContextPropType,
 } from "../../context_helper";
-import { addToCart } from '../utils/utils';
+import { addToCart, bookMarkItem } from '../utils/utils';
 import { ProviderContext, subscribe } from "react-contextual";
 import { withRouter } from "react-router";
 import Messages from '../Message/Message';
@@ -29,13 +29,21 @@ class DetailedPage extends Component {
     this.setState({ quantity: event.target.value });
   }
 
+  bookMarkHandler(event){
+    this.props.messageContext.clearMessages();
+    if(this.props.sessionContext.user.id === undefined){
+      this.props.history.push('/login')
+    }else{
+      bookMarkItem(this.props.location.state.key.product_id, this.props.sessionContext, this.props.messageContext);
+    }
+  }
+
   addToCartHandler(event){
     this.props.messageContext.clearMessages();
     if(this.props.sessionContext.user.id === undefined){
       this.props.history.push('/login')
     }else{
       addToCart(this.props.location.state.key.product_id, this.props.sessionContext, this.state.quantity, this.props.messageContext, this.props.sessionCartInfo);
-
     }
   }
   
@@ -47,7 +55,7 @@ class DetailedPage extends Component {
     return (
     <div className="container">
       <div className="card">
-     <Messages messages={this.props.messageContext.messages} />
+      <Messages messages={this.props.messageContext.messages} />
         <div className="container-fliud">
           <div className="wrapper row">
             <div className="preview col-md-6">
@@ -84,7 +92,7 @@ class DetailedPage extends Component {
               </div>
               <div className="action">
                 <button className="add-to-cart btn btn-default" type="button" onClick={this.addToCartHandler.bind(this)}>add to cart</button>
-                <button class="like btn btn-default bookmark-icon" type="button"><span class="fa fa-heart "></span></button>
+                <button className="like btn btn-default bookmark-icon" type="button" onClick={this.bookMarkHandler.bind(this)}><span className="fa fa-heart "></span></button>
               </div>
             </div>
           </div>
