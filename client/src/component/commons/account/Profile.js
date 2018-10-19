@@ -1,21 +1,47 @@
 import React, { Component } from 'react';
+import { Link, Route } from "react-router-dom";
 import './Profile.css'
+import BookMarkedItems from './BookMarkedItems';
+import { ProviderContext, subscribe } from "react-contextual";
+import { 
+  mapSessionContextToProps, 
+  sessionContextPropType, 
+  mapMessageContextToProps,
+  messageContextPropType,
+} from "../../../context_helper"
+import Messages from '../../Message/Message';
+import Account from './Account';
 class Profile extends Component {
+
+  static propTypes = {
+    ...sessionContextPropType,
+    ...messageContextPropType
+  };
+
+  constructor(){
+    super()
+    this.state= {
+      component: '',
+    }
+  }
+
+  componentToggler(e){
+    e.preventDefault();
+    this.setState({ component : e.target.value })
+  }
+
   render() {
     return (
       <div>
         <div className="customer-panel">
          <div className="list-group" >
-            <a href="#" class="list-group-item active"><i class="fa fa-key"></i> <span>App Settings</span></a>
-            <a href="#" class="list-group-item"><i class="fa fa-credit-card"></i> <span>Billing</span></a>
-            <a href="#" class="list-group-item"><i class="fa fa-question-circle"></i> <span>Support</span></a>
-            <a href="#" class="list-group-item"><i class="fa fa-arrow-circle-o-left"></i> <span>Sandbox Account</span></a>
-            <a href="#" class="list-group-item"><i class="fa fa-book"></i> <span>QuickStart Overview</span></a>
-            <a href="#" class="list-group-item"><i class="fa fa-compass"></i> <span>Documentation</span></a>
-          </div>
-          <div className="customer-panel-content">
-            <div>
-              <h1>hello</h1>
+            <a href="#" className="list-group-item" value="bookmarks" onClick={this.componentToggler.bind(this)}> <span>My bookmarked Items</span></a>
+            <a href="#" className="list-group-item" value="orders" onClick={this.componentToggler.bind(this)}><span>All orders</span></a>
+            <a href="#" className="list-group-item" value="account" onClick={this.componentToggler.bind(this)}><span>Account manage</span></a>
+         </div>
+          <div>
+            <div className="customer-panel-content">
+              <Account/>
             </div>
           </div>
         </div>
@@ -24,4 +50,13 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+const mapContextToProps = context => {
+  return {
+    ...mapSessionContextToProps(context),
+    ...mapMessageContextToProps(context)
+  };
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(
+  Profile
+);
