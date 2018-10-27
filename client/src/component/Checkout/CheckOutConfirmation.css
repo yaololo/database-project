@@ -9,12 +9,14 @@
 .product-details{
   display: grid;
   grid-template-columns: 15% auto 10% 10%;
-  grid-gap: 50px;
-
+  /* grid-gap: 50px; */
+  grid-row-gap: 50px;
+  grid-column-gap: 20px;
+  margin: 20px;
 }
 
 .order-address{
   display: grid;
-  grid-template-columns: 60% auto;
+  grid-template-columns: 15% auto;
   grid-gap: 50px;
 }

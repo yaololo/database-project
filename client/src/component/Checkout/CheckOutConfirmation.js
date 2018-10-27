@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './CheckOutConfirmation.css'
 import Messages from '../Message/Message';
 import { placeOrder } from '../utils/utils';
-import { 
-  mapMessageContextToProps,  
+import {
+  mapMessageContextToProps,
   mapSessionContextToProps,
   mapItemsToCart,
   sessionCartInfoPropType,
@@ -20,16 +20,18 @@ class CheckOutConfirmation extends Component {
     ...messageContextPropType
   };
 
+
   placeOrderHandler(e){
     e.preventDefault();
-    placeOrder( 
-      this.props.location.state.addressInfo, 
-      this.props.sessionContext, 
-      this.props.messageContext, 
-      this.props.location.state.productInfoList 
+    placeOrder(
+      this.props.location.state.addressInfo,
+      this.props.sessionContext,
+      this.props.messageContext,
+      this.props.location.state.productInfoList
       );
   }
   render() {
+    console.log(this.props.location.state.addressInfo)
     return (
       <div>
          <Messages messages={this.props.messageContext.messages} />
@@ -50,28 +52,28 @@ class CheckOutConfirmation extends Component {
                   <div><img src={element.productDetails[0].image.split(',')[0]} alt=""/></div>
                   <div>{element.productDetails[0].p_name}</div>
                   <div>{element.quantity}</div>
-                  <div>{`$${element.productDetails[0].unit_price}`}</div>
+                  <div>{`$${(Number(element.productDetails[0].unit_price)*Number(element.quantity)).toFixed(2)}`}</div>
                 </div>
               )
             })}
             <div><h3>Address & Contact Information</h3></div>
-          <div className="order-address">
-           <div>
-            <div>Receiver</div>
-            <div>Contact</div>
-            <div>Street Name</div>
-            <div>Country</div>
-            <div>City</div>
-            <div>Postcode</div>
+            <div className="order-address">
+            <div>
+              <div>Receiver</div>
+              <div>Contact</div>
+              <div>Street Name</div>
+              <div>Country</div>
+              <div>City</div>
+              <div>Postcode</div>
             </div>
             <div>
               <div>{this.props.location.state.addressInfo.receiver}</div>
-                <div>{this.props.location.state.addressInfo.contact}</div>
-                <div>{this.props.location.state.addressInfo.street}</div>
-                <div>{this.props.location.state.addressInfo.country}</div>
-                <div>{this.props.location.state.addressInfo.city}</div>
-                <div>{this.props.location.state.addressInfo.postcode}</div>
-              </div>
+              <div>{this.props.location.state.addressInfo.contact}</div>
+              <div>{this.props.location.state.addressInfo.street}</div>
+              <div>{this.props.location.state.addressInfo.country}</div>
+              <div>{this.props.location.state.addressInfo.city}</div>
+              <div>{this.props.location.state.addressInfo.postcode}</div>
+            </div>
           </div>
           <div className="confirmation">
           <button className="btn btn-success" >Place Order </button>
