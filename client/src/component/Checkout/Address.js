@@ -6,11 +6,21 @@ class Address extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { country: "", city: "", street: "", postcode: "", contact: "", receiver: "" };
+    this.state = { country: "", city: "", street: "", postcode: '', contact: '', receiver: "" };
+    this.buttonState= "disabled"
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+    if(this.state.country.length > 0 &&
+      this.state.city.length > 0 &&
+      this.state.street.length > 0 &&
+      this.state.postcode.length > 6&&
+      this.state.contact.length > 8 &&
+      this.state.receiver.length > 0
+      ){ this.buttonState = ''} else{
+        this.buttonState = 'disabled'
+      }
   }
 
   proceedHandler(event) {
@@ -44,7 +54,7 @@ class Address extends Component {
               <legend>Address</legend>
               <div className="form-group address-country-city-input">
                 <div className="address-country">
-                  <h4 htmlFor="name">Country</h4>
+                  <h4 htmlFor="name">Country *</h4>
                   <input
                     type="text"
                     name="country"
@@ -57,7 +67,7 @@ class Address extends Component {
                   />
                 </div>
                 <div className="address-city">
-                  <h4 htmlFor="name">City</h4>
+                  <h4 htmlFor="name">City *</h4>
                     <input
                       type="text"
                       name="city"
@@ -70,7 +80,7 @@ class Address extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <h4 htmlFor="name">Street Name</h4>
+                <h4 htmlFor="name">Street Name *</h4>
                 <textarea
                   type="text"
                   rows='3'
@@ -83,10 +93,12 @@ class Address extends Component {
               </div>
               <div className="form-group address-postcode-input">
                 <div>
-                  <h4 htmlFor="name">Postcode</h4>
+                  <h4 htmlFor="name">Postcode *</h4>
                   <input
-                    type="text"
-                    name="postCode"
+                    type="number"
+                    minLength="6"
+                    maxLength="6"
+                    name="postcode"
                     placeholder="Postcode"
                     autoFocus
                     className="form-control "
@@ -99,7 +111,7 @@ class Address extends Component {
               </div>
               <div className="form-group address-contact-receiver-input">
                 <div className="address-country">
-                  <h4 htmlFor="name">Receiver</h4>
+                  <h4 htmlFor="name">Receiver *</h4>
                   <input
                     type="text"
                     name="receiver"
@@ -111,10 +123,12 @@ class Address extends Component {
                   />
                 </div>
                 <div className="address-city">
-                  <h4 htmlFor="name">Contact</h4>
+                  <h4 htmlFor="name">Contact *</h4>
                     <input
-                      type="text"
-                      name="city"
+                      type="number"
+                      name="contact"
+                      minLength="8"
+                      maxLength="8"
                       placeholder="Contact"
                       autoFocus
                       className="form-control address-city"
@@ -127,6 +141,7 @@ class Address extends Component {
                 type="submit"
                 className="btn btn-success"
                 data-cy="signUp-submit"
+                disabled={this.buttonState}
               >
                 Proceed
               </button>
