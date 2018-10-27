@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Route } from "react-router-dom";
-import './Profile.css'
+// import './Profile.css'
 import BookMarkedItems from './BookMarkedItems';
 import { ProviderContext, subscribe } from "react-contextual";
-import { 
-  mapSessionContextToProps, 
-  sessionContextPropType, 
+import {
+  mapSessionContextToProps,
+  sessionContextPropType,
   mapMessageContextToProps,
   messageContextPropType,
 } from "../../../context_helper"

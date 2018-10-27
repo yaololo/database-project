@@ -27,7 +27,7 @@ export function login({
           quantity += json.productList[i].quantity;
         }
         messageContext.setSuccessMessages(json.msg);
-        sessionCartInfo.updateCartProductList(json.productList);
+        // sessionCartInfo.updateCartProductList(json.productList);
         sessionCartInfo.updateNoOfItemInCart(quantity)
         sessionContext.saveSession(json.token, json.user);
         cookies.set("token", json.token, {

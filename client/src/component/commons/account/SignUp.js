@@ -33,6 +33,7 @@ class SignUp extends React.Component {
 
   handleSignup(event) {
     event.preventDefault();
+    console.log('clicked')
     signup({
       firstName: this.state.firstName,
       lastName: this.state.lastName,

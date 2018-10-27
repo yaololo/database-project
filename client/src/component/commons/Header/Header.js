@@ -4,8 +4,9 @@ import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
+import { Route, Redirect } from 'react-router';
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper";
-
+// Redire
 class Header extends React.Component {
   static propTypes = {
     history: object.isRequired,
@@ -15,7 +16,8 @@ class Header extends React.Component {
   };
 
   goToCart(){
-    this.props.history.push('/my_cart');
+    
+    // this.props.history.push('/my_cart');
   }
 
   render() {
@@ -31,11 +33,11 @@ class Header extends React.Component {
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="nav-item">
-              <a className="nav-link shopping-cart" onClick={this.goToCart.bind(this)}>
+            <Link to="/my_cart" >
                 <i className="fas fa-shopping-cart">
                   <span className="badge badge-danger">{this.props.sessionCartInfo.noOfItems}</span>
                 </i>
-              </a>
+            </Link>  
             </li>
           <li className="dropdown" data-cy="profile">
             <a
@@ -90,7 +92,7 @@ class Header extends React.Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <NavLink exact to="/my_cart" className="navbar-brand">
+            <NavLink exact to="/" className="navbar-brand">
               <em></em>Online Store
             </NavLink>
           </div>
