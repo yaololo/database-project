@@ -14,7 +14,6 @@ const cartDetailsHandler = async function(req, res){
       function(error, results, fields) {
         if(error){
           console.log('getting productList error: '+ error.sqlMessage)
-          // connection.on('error', function() {} );
           connection.end()
           return res.status(500).send(
             JSON.stringify({
@@ -33,15 +32,14 @@ const cartDetailsHandler = async function(req, res){
 
           console.log(results)
           let productList = results;
+          let count = 0;
 
-          for(i=0 ; i< productList.length; i++){
-            console.log("logging product_id : " + productList[i].product_id)
+          productList.map(element => {
             let connection = dbSetup.connect();
-            connection.query('SELECT * FROM product WHERE product_id = ?', productList[i].product_id,
+            connection.query('SELECT * FROM product WHERE product_id = ?', element.product_id,
             function(error, results, fields) {
               if(error){
                 console.log(error.sqlMessage)
-                // connection.on('error', function() {} );
                 connection.end();
                 return res.status(500).send(
                   JSON.stringify({
@@ -49,9 +47,8 @@ const cartDetailsHandler = async function(req, res){
                   })
                 );
               } else{
-                // console.log(productList[i].product_id)
                 let productInfo = {
-                  quantity: productList[count].quantity,
+                  quantity: element.quantity,
                   productDetails: results
                 }
 
@@ -67,7 +64,7 @@ const cartDetailsHandler = async function(req, res){
               }
             })
             connection.end()
-          }
+          })
         }
     })
   } catch (error) {
