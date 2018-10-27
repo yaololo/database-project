@@ -47,9 +47,11 @@ class ShoppingCart extends Component {
   }
 
 
-  onChangeHandler(product ,event){
+  onChangeHandler(idx, event){
     event.preventDefault();
-    this.setState({ quantity: event.target.value });
+    console.log('clicked')
+    this.props.sessionCartInfo.cartProductInfoList[idx].quantity = event.target.value
+    this.setState({ data: this.props.sessionCartInfo.cartProductInfoList });
   }
 
   removeItemHandler(event){
@@ -67,7 +69,7 @@ class ShoppingCart extends Component {
     this.props.history.push({
       pathname:`/checkout/address`,
       state:{
-          productInfoList: this.props.sessionCartInfo.cartProductInfoList,
+          productInfoList: this.state.data,
           userInfo: this.props.sessionContext.user
        }
      });
@@ -106,8 +108,10 @@ class ShoppingCart extends Component {
                                     <td width="120"><img src={element.productDetails[0].image.split(',')[0]} alt=""/> </td>
                                     <td>{element.productDetails[0].p_name}</td>
                                     <td>In stock</td>
-                                    <td><input className="text-center cart-input-quantity" width="80" type="number" name="quantity" maxLength="4" size="4" value={element.quantity}/></td>
-                                    <td className="text-right">{`$${element.productDetails[0].unit_price}`}</td>
+                                    <td><input className="text-center cart-input-quantity" width="80" type="number"
+                                                name="quantity" maxLength="4" size="4" min="1" maxLength="4" value={element.quantity}
+                                                onChange={this.onChangeHandler.bind(this, i)}/></td>
+                                    <td className="text-right">{`$${(Number(element.productDetails[0].unit_price)*Number(element.quantity)).toFixed(2)}`}</td>
                                             <td className="text-right">
                                     <button type="button" className="btn btn-danger" value={i} onClick={this.removeItemHandler.bind(this)}>
                                       <i className="fas fa-trash-alt"></i> Remove
@@ -115,30 +119,6 @@ class ShoppingCart extends Component {
                                 </tr>
                               );
                           })}
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td className="text-right"  background="white"><h5>Subtotal</h5></td>
-                          <td className="text-right"><h5><strong>$24.59</strong></h5></td>
-                      </tr>
-                      <tr>
-                          <td>   </td>
-                          <td>   </td>
-                          <td>   </td>
-                          <td>   </td>
-                          <td className="text-right"><h5>Estimated shipping</h5></td>
-                          <td className="text-right"><h5><strong>$6.94</strong></h5></td>
-                      </tr>
-                      <tr>
-                          <td>   </td>
-                          <td>   </td>
-                          <td>   </td>
-                          <td>   </td>
-                          <td className="text-right"><h3>Total</h3></td>
-                          <td className="text-right"><h3><strong>$31.53</strong></h3></td>
-                      </tr>
                       <tr>
                           <td></td>
                           <td></td>
