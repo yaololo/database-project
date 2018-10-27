@@ -24,13 +24,13 @@ export function addToCart (itemId, sessionContext, quantity, messageContext, car
   });
 }
 
-export function getItemDetails(productList, token, cartSessionInfo){
+export function getItemDetails(userId, token, cartSessionInfo){
   fetch('/api/my_cart_details', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       token: token,
-      productList: productList
+      userId: userId
     })
   }).then(response => {
     if (response.ok) {
