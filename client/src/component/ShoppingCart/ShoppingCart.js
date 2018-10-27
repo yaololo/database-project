@@ -13,36 +13,35 @@ class ShoppingCart extends Component {
 
   constructor(props){
     super(props);
-    this.state={ data: [] }
+    this.state={ data: props.sessionCartInfo.cartProductInfoList}
     this.isUpdated = false;
     this.isFetched = false;
-    this.isStateUpdated = false;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: nextProps.sessionCartInfo.cartProductInfoList
+    })
   }
 
   componentWillMount(){
     if(this.props.sessionContext.token === 'true' && this.isFetched === false){
-      console.log('rendered by will mount')
-      getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
+      getItemDetails(this.props.sessionContext.user.id, this.props.sessionContext.token, this.props.sessionCartInfo);
       this.isFetched= true;
+      this.isUpdated= false;
     }
   }
 
   componentDidUpdate(){
-    console.log('did updated shows up');
-    console.log(this.props.sessionCartInfo.noOfItems)
     if(this.isFetched === true && this.props.sessionCartInfo.noOfItems > 0 && this.isUpdated === false){
-      console.log('within first if')
-      console.log(this.props.sessionCartInfo.cartProductInfoList.length)
       if(this.props.sessionCartInfo.cartProductInfoList.length > 0){
-        console.log("updated by did updated")
-        this.setState({data: this.props.sessionCartInfo.cartProductInfoList });
+        this.setState({data: this.props.sessionCartInfo.cartProductInfoList});
         this.isUpdated = true;
       }
     }
 
     if( this.props.sessionContext.token === 'true' && this.isFetched === false){
-      console.log('fetched by did update')
-      getItemDetails(this.props.sessionCartInfo.cartProductList, this.props.sessionContext.token, this.props.sessionCartInfo);
+      getItemDetails(this.props.sessionContext.user.id, this.props.sessionContext.token, this.props.sessionCartInfo);
       this.isFetched = true;
     }
   }
@@ -55,7 +54,7 @@ class ShoppingCart extends Component {
 
   removeItemHandler(event){
     event.preventDefault();
-    this.props.sessionCartInfo.cartProductInfoList.splice(event.target.value, 1); 
+    this.props.sessionCartInfo.cartProductInfoList.splice(event.target.value, 1);
     let newState = this.props.sessionCartInfo.cartProductInfoList;
     this.setState({data: newState});
   }
@@ -76,7 +75,7 @@ class ShoppingCart extends Component {
 
   render() {
     if(this.props.sessionCartInfo.noOfItems <= 0){
-      return (   
+      return (
         <div className="container text-center">
           <h1>Your Cart is empty.</h1>
           <button className="btn btn-default" onClick={this.continueShopping.bind(this)}>Continue Shopping <i className="fas fa-shopping-cart"></i></button>
@@ -156,7 +155,7 @@ class ShoppingCart extends Component {
                       </table>
                   </div>
               </div>
-              
+
           </div>
       </div>
       );
