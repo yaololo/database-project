@@ -32,9 +32,9 @@ img {
 
 
 .tab-content {
-  overflow: hidden; 
+  overflow: hidden;
 }
-/* 
+/*
 .preview-pic {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -48,7 +48,7 @@ img {
     -webkit-animation-name: opacity;
             animation-name: opacity;
     -webkit-animation-duration: .3s;
-            animation-duration: .3s; 
+            animation-duration: .3s;
 }
 
 .card {
@@ -166,9 +166,9 @@ img {
             transform: scale(1); } }
 
 .bookmark-icon{
-  font-size: 25px;
-  color: grey;
-  margin-left: 25%;
+  /* font-size: 25px; */
+  /* color: grey; */
+  margin-left: 10%;
 }
 
 .bookmark-icon :hover{
