@@ -1,0 +1,19 @@
+.customer-panel{
+  display: grid;
+  grid-template-columns: 15% auto;
+  grid-column-gap: 20px;
+}
+
+.list-group {
+  /* margin:auto; */
+  /* float:left; */
+  min-height: 100vh;
+  /* border: 1px black solid; */
+  background-color: #fff;
+ }
+ .lead {
+  /* margin:auto; */
+  left:0;
+  right:0;
+  /* padding-top:10%; */
+ }
