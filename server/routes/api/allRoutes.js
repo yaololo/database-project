@@ -1,3 +1,4 @@
+const placeOrderHandler= require('../actions/placeOrderHandler');
 const loginHandler = require('../actions/loginHandler');
 const signUpHandler = require('../actions/signUpHandler');
 const onLandingAction = require('../actions/onLanding');
@@ -15,7 +16,7 @@ router.post('/user/login', handleAsyncError(loginHandler));
 
 router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
 
-router.post('/user/place_order', handleAsyncError(loginHandler))
+router.post('/place_order', handleAsyncError(placeOrderHandler))
 
 
 
@@ -120,13 +121,13 @@ router.post("/add_feedback",addFeedback);
 
 router.get("/select_by_brand",selectByBrand);
 
-router.get("/cust_order_hist",custOrderHist);
+router.post("/cust_order_hist",custOrderHist);
 
 router.get("/search_by_keyword",searchByKeyword);
 
 router.get("/search_by_price",searchByPrice);
 
-router.get("/view_bookmark_item",viewBookmarkItem);
+router.post("/view_bookmark_item",viewBookmarkItem);
 
 router.delete("/delete_item_in_cart",deleteItemInCart);
 
