@@ -15,8 +15,8 @@ class Address extends Component {
     if(this.state.country.length > 0 &&
       this.state.city.length > 0 &&
       this.state.street.length > 0 &&
-      this.state.postcode.length > 6&&
-      this.state.contact.length > 8 &&
+      this.state.postcode.length > 0 &&
+      this.state.contact.length > 0 &&
       this.state.receiver.length > 0
       ){ this.buttonState = ''} else{
         this.buttonState = 'disabled'
@@ -95,7 +95,8 @@ class Address extends Component {
                 <div>
                   <h4 htmlFor="name">Postcode *</h4>
                   <input
-                    type="number"
+                    type="text"
+                    pattern="\d*"
                     minLength="6"
                     maxLength="6"
                     name="postcode"
@@ -125,8 +126,9 @@ class Address extends Component {
                 <div className="address-city">
                   <h4 htmlFor="name">Contact *</h4>
                     <input
-                      type="number"
+                      type="text"
                       name="contact"
+                      pattern="\d*"
                       minLength="8"
                       maxLength="8"
                       placeholder="Contact"
