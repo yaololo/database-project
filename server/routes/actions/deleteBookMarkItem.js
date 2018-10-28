@@ -3,7 +3,7 @@ const dbSetup = require("../../DbConnection/setupConnection");
 const deleteBookMarkItem = async function(req, res) {
   try {
     let customer_id = req.body.user.customerId;
-    let product_id = req.body.product.productId;
+    let product_id = req.body.productId;
     let token = req.body.user.token;
 
     if (token !== "true") {
@@ -13,6 +13,9 @@ const deleteBookMarkItem = async function(req, res) {
         })
       );
     }
+    console.log('triggered')
+    console.log(customer_id)
+    console.log(product_id)
 
     let connection = dbSetup.connect();
     let sql = "DELETE FROM bookmark WHERE customer_id = ? AND product_id = ?;";
@@ -22,16 +25,16 @@ const deleteBookMarkItem = async function(req, res) {
       [customer_id,product_id],
       function(error, results, fields) {
         if (error) {
-          console.log(error);
+          console.log(error.sqlMessage);
           return res.status(500).send(
             JSON.stringify({
-              data: "Something went wrong while while deleting item from bookmark."
+              msg: "Something went wrong while while deleting item from bookmark."
             })
           );
         } else {
           return res.status(200).send(
             JSON.stringify({
-              msg: "successful deleted item in the bookmark."
+              msg: "Successful deleted the bookmark."
             })
           );
         }

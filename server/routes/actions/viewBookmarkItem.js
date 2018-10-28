@@ -2,8 +2,9 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const viewBookmarkItem = async function(req, res) {
   try {
-    let customer_id = req.body.user.customerId;
+    let customer_id = req.body.customerId;
 
+    console.log(customer_id)
     var connection = dbSetup.connect();
     let sql =
       "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image "+

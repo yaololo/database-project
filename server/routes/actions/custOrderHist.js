@@ -2,7 +2,7 @@ const dbSetup = require("../../DbConnection/setupConnection");
 
 const custOrderHist = async function(req, res) {
   try {
-    let customer_id = req.body.user.customerId;
+    let customer_id = req.body.customerId;
 
 
     var connection = dbSetup.connect();
@@ -18,7 +18,7 @@ const custOrderHist = async function(req, res) {
         console.log(error);
         return res.status(500).send(
           JSON.stringify({
-            data: "Something went wrong while retrieving data."
+            msg: "Something went wrong while retrieving data."
           })
         );
       } else {

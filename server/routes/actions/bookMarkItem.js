@@ -6,7 +6,6 @@ const bookMarkItem = async function(req, res) {
     let product_id = req.body.productId;
     let token = req.body.token;
 
-    console.log('I am being called')
     if (token !== "true") {
       return res.status(500).send(
         JSON.stringify({
@@ -30,11 +29,11 @@ const bookMarkItem = async function(req, res) {
               })
             );
           } else {
-              return res.status(200).send(
-                  JSON.stringify({
-                  msg: "successful bookmark the item."
-                  })
-              );
+            return res.status(200).send(
+              JSON.stringify({
+              msg: "successful bookmark the item."
+              })
+            );
           }
         }
       );
@@ -45,3 +44,5 @@ const bookMarkItem = async function(req, res) {
 };
 
 module.exports = bookMarkItem;
+
+
