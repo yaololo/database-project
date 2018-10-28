@@ -7,7 +7,7 @@ const viewBookmarkItem = async function(req, res) {
     console.log(customer_id)
     var connection = dbSetup.connect();
     let sql =
-      "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image "+
+      "SELECT p.p_name,p.description,p.unit_price,c.category_name,b.brand_name,p.image,p.product_id "+
       "FROM product p "+
           "INNER JOIN category c ON p.category_id =c.category_id "+
           "INNER JOIN brand b ON p.brand_id = b.brand_id "+
