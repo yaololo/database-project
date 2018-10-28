@@ -1,20 +1,28 @@
-.order-details{
-  max-width: 65vw;
-  /* margin: 0 auto; */
-  /* text-align: center; */
-  background:  #fff;
+.bookmarked-item{
+  max-width: 50vw;
   padding: 20px;
   margin-bottom: 1em;
-}
-.product-details{
   display: grid;
-  grid-template-columns: 15% auto 10% ;
-  grid-gap: 50px;
-
+  grid-template-columns: 10% auto 10% 20%;
+  grid-column-gap: 10px;
+  background-color: #fff
 }
 
-.order-address{
+.bookmarked-item-content{
+  padding-left: 13vw;
+  /* margin:0 auto; */
+}
+
+.order-item{
+  max-width: 40vw;
+  padding: 20px;
+  margin-bottom: 1em;
   display: grid;
-  grid-template-columns: 60% auto;
-  grid-gap: 50px;
+  grid-template-columns: 70% auto;
+  grid-column-gap: 40px;
+  background-color: #fff
+}
+
+.order-history-quantity{
+  margin: 0 auto;
 }
