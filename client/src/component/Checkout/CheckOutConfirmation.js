@@ -20,6 +20,10 @@ class CheckOutConfirmation extends Component {
     ...messageContextPropType
   };
 
+  constructor(){
+    super();
+    this.subTotal= 0;
+  }
 
   placeOrderHandler(e){
     e.preventDefault();
@@ -47,8 +51,9 @@ class CheckOutConfirmation extends Component {
             <div><h4>Price</h4></div>
           </div>
             {this.props.location.state.productInfoList.map((element, i) => {
+              this.subTotal= this.subTotal + Number(element.productDetails[0].unit_price)*Number(element.quantity).toFixed(2);
               return(
-                <div className="product-details">
+                <div className="product-details" key={i}>
                   <div><img src={element.productDetails[0].image.split(',')[0]} alt=""/></div>
                   <div>{element.productDetails[0].p_name}</div>
                   <div>{element.quantity}</div>
@@ -56,6 +61,13 @@ class CheckOutConfirmation extends Component {
                 </div>
               )
             })}
+            <div>
+              <div> </div>
+              <div> </div>
+              <div><h1>Subtotal</h1></div>
+              <div><h1>{`$${this.subTotal.toFixed(2)}`}</h1></div>
+            </div>
+
             <div><h3>Address & Contact Information</h3></div>
             <div className="order-address">
             <div>
@@ -76,7 +88,7 @@ class CheckOutConfirmation extends Component {
             </div>
           </div>
           <div className="confirmation">
-          <button className="btn btn-success" >Place Order </button>
+          <button className="btn btn-success" onClick={this.placeOrderHandler.bind(this)}>Place Order </button>
           </div>
         </div>
       </div>
