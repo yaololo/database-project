@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route } from "react-router-dom";
-// import './Profile.css'
+import './Profile.css'
 import BookMarkedItems from './BookMarkedItems';
 import { ProviderContext, subscribe } from "react-contextual";
 import {
@@ -11,6 +11,7 @@ import {
 } from "../../../context_helper"
 import Messages from '../../Message/Message';
 import Account from './Account';
+import ProfileContent from './ProfileContent';
 class Profile extends Component {
 
   static propTypes = {
@@ -25,9 +26,10 @@ class Profile extends Component {
     }
   }
 
-  componentToggler(e){
-    e.preventDefault();
-    this.setState({ component : e.target.value })
+  componentToggler(event){
+
+    event.preventDefault();
+    this.setState({ component : event.target.value })
   }
 
   render() {
@@ -35,13 +37,13 @@ class Profile extends Component {
       <div>
         <div className="customer-panel">
          <div className="list-group" >
-            <a href="#" className="list-group-item" value="bookmarks" onClick={this.componentToggler.bind(this)}> <span>My bookmarked Items</span></a>
-            <a href="#" className="list-group-item" value="orders" onClick={this.componentToggler.bind(this)}><span>All orders</span></a>
-            <a href="#" className="list-group-item" value="account" onClick={this.componentToggler.bind(this)}><span>Account manage</span></a>
+            <button className="list-group-item" value="bookmarks" onClick={this.componentToggler.bind(this)}> My bookmarked Items</button>
+            <button className="list-group-item" value="orders" onClick={this.componentToggler.bind(this)}>All orders</button>
+            <button className="list-group-item" value="account" onClick={this.componentToggler.bind(this)}>Account manage</button>
          </div>
           <div>
             <div className="customer-panel-content">
-              <Account/>
+              <ProfileContent component={this.state.component} />
             </div>
           </div>
         </div>
