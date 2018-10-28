@@ -35,7 +35,7 @@ export function getItemDetails(userId, token, cartSessionInfo){
   }).then(response => {
     if (response.ok) {
       response.json().then(json => {
-        console.log(json.productInfoList)
+        // console.log(json.productInfoList)
         cartSessionInfo.updateCartProductInfoList(json.productInfoList)
       });
     } else {
@@ -65,13 +65,8 @@ export function bookMarkItem(itemId, sessionContext, messageContext){
 }
 
 export function placeOrder(addressInfo, sessionContext, messageContext, productInfoList){
-  let correctAddressInfo ={
-    address: addressInfo.street,
-    postcode: addressInfo.postcode,
-    country: addressInfo.country,
-  }
 
-  fetch('/api/book_mark_item', {
+  fetch('/api/place_order', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -83,10 +78,13 @@ export function placeOrder(addressInfo, sessionContext, messageContext, productI
   }).then(response => {
     if (response.ok) {
       response.json().then(json => {
+        console.log(json.msg)
         messageContext.setSuccessMessages(json.msg)
       })
     } else {
-      console.log('something wrong during getting product details');
+      response.json().then(json => {
+        console.log(json.msg)
+      })
     }
   });
 }
