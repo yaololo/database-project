@@ -35,7 +35,7 @@ class LayoutTemplate extends Component {
               <div key={i} className="content">
                 <div className="picture">
                   <img src={element.image.split(',')[0]} alt="" onClick= {this.onClickHandler.bind(this, this.item)}/>
-                  <h1></h1>
+                  <br/>
                 </div>
                 <div className="short-description">
                   {element.p_name}
