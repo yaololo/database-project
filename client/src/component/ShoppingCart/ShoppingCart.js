@@ -109,7 +109,7 @@ class ShoppingCart extends Component {
                                     <td>{element.productDetails[0].p_name}</td>
                                     <td>In stock</td>
                                     <td><input className="text-center cart-input-quantity" width="80" type="number"
-                                                name="quantity" maxLength="4" size="4" min="1" maxLength="4" value={element.quantity}
+                                                name="quantity" maxLength="4" size="4" min="1" value={element.quantity}
                                                 onChange={this.onChangeHandler.bind(this, i)}/></td>
                                     <td className="text-right">{`$${(Number(element.productDetails[0].unit_price)*Number(element.quantity)).toFixed(2)}`}</td>
                                             <td className="text-right">
