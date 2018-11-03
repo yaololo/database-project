@@ -64,8 +64,7 @@ export function bookMarkItem(itemId, sessionContext, messageContext){
   });
 }
 
-export function placeOrder(addressInfo, sessionContext, messageContext, productInfoList){
-
+export function placeOrder(addressInfo, sessionContext, messageContext, productInfoList, sessionCartInfo, history){
   fetch('/api/place_order', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
@@ -78,8 +77,15 @@ export function placeOrder(addressInfo, sessionContext, messageContext, productI
   }).then(response => {
     if (response.ok) {
       response.json().then(json => {
-        console.log(json.msg)
+        sessionCartInfo.updateNoOfItemInCart(0);
+        sessionCartInfo.updateCartProductInfoList([]);
         messageContext.setSuccessMessages(json.msg)
+        history.push({
+          pathname:`/checkout/confirm_checkout`,
+          state:{
+            isPlacedOrder: true
+           }
+         });
       })
     } else {
       response.json().then(json => {
