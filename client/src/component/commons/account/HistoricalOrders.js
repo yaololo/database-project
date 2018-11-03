@@ -7,7 +7,6 @@ import {
 } from "../../../context_helper"
 import { ProviderContext, subscribe } from "react-contextual";
 import './BookmarkedItems.css';
-import Messages from '../../Message/Message';
 class HistoricalOrders extends Component {
    static propTypes = {
     ...sessionContextPropType,

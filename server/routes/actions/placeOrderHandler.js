@@ -32,8 +32,7 @@ const placeOrderHandler = async function(req, res) {
     }
     stringProductInfoListIds = stringProductInfoListIds.substring(0, stringProductInfoListIds.length-1)
     stringProductQuantity = stringProductQuantity.substring(0, stringProductQuantity.length-1)
-    console.log(stringProductInfoListIds);
-    console.log(stringProductQuantity);
+
 
     let connection = dbSetup.connect();
 

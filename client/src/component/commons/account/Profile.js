@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from "react-router-dom";
 import './Profile.css'
-import BookMarkedItems from './BookMarkedItems';
 import { ProviderContext, subscribe } from "react-contextual";
 import {
   mapSessionContextToProps,
@@ -9,8 +7,6 @@ import {
   mapMessageContextToProps,
   messageContextPropType,
 } from "../../../context_helper"
-import Messages from '../../Message/Message';
-import Account from './Account';
 import ProfileContent from './ProfileContent';
 class Profile extends Component {
 

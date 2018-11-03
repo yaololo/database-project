@@ -4,11 +4,9 @@ import { signup } from "../Auth/Auth";
 import { object, instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { ProviderContext, subscribe } from "react-contextual";
-import { 
-  mapSessionContextToProps, 
-  sessionContextPropType, 
-  sessionCartInfoPropType, 
-  mapItemsToCart,
+import {
+  mapSessionContextToProps,
+  sessionContextPropType,
   mapMessageContextToProps,
   messageContextPropType,
 } from "../../../context_helper"
@@ -112,7 +110,7 @@ class SignUp extends React.Component {
               </div>
               <div className="form-group">
                 <span>
-                  <label className="gender-label">Male 
+                  <label className="gender-label">Male
                     <input
                       type="radio"
                       name="gender"
@@ -123,7 +121,7 @@ class SignUp extends React.Component {
                   </label>
                 </span>
                 <span>
-                  <label className="gender-label">Female 
+                  <label className="gender-label">Female
                     <input
                       type="radio"
                       name="gender"

@@ -9,7 +9,6 @@ class ProfileContent extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('updated by did mount')
     this.setState({
       component: nextProps.component
     })

@@ -4,9 +4,7 @@ import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
-import { Route, Redirect } from 'react-router';
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper";
-// Redire
 class Header extends React.Component {
   static propTypes = {
     history: object.isRequired,
@@ -14,11 +12,6 @@ class Header extends React.Component {
     ...sessionContextPropType,
     ...sessionCartInfoPropType
   };
-
-  goToCart(){
-    
-    // this.props.history.push('/my_cart');
-  }
 
   render() {
     const active = { borderBottomColor: "#3f51b5" };
@@ -37,7 +30,7 @@ class Header extends React.Component {
                 <i className="fas fa-shopping-cart">
                   <span className="badge badge-danger">{this.props.sessionCartInfo.noOfItems}</span>
                 </i>
-            </Link>  
+            </Link>
             </li>
           <li className="dropdown" data-cy="profile">
             <a
