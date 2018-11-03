@@ -52,15 +52,14 @@ const placeOrderHandler = async function(req, res) {
           );
         } else {
           let address_id = results.insertId
-          let sql="call `create_order`(6,11,1,'2018-10-18','4,1,3,2,5,8,6,7,9,13,12,10,11,15,14,18,20,23,21,22,30,41,40,43,31,42','1,4,1,3,1,1,1,1,1,1,1,1,1,1,1,1,2,1,4,5,1,3,1,1,1,1');";
-          // call `createOrder`(6,11,1,'2018-10-18','4,1,3,2,5,8,6,7,9,13,12,10,11,15,14,18,20,23,21,22,30,41,40,43,31,42','1,4,1,3,1,1,1,1,1,1,1,1,1,1,1,1,2,1,4,5,1,3,1,1,1,1');
+          let sql = "call `createOrder`(?,?,?,?,?,?)";
           let date = new Date();
           let currentDate = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
           console.log(typeof parseInt(addressInfo.customer_id))
           let connection = dbSetup.connect();
           connection.query(
             sql,
-            // [parseInt(addressInfo.customer_id), parseInt(address_id), 1, currentDate, stringProductInfoListIds, stringProductQuantity],
+            [parseInt(addressInfo.customer_id), parseInt(address_id), 1, currentDate, stringProductInfoListIds, stringProductQuantity],
             function(error, results, fields){
               if(error){
                 console.log(error.sqlMessage);
@@ -70,11 +69,28 @@ const placeOrderHandler = async function(req, res) {
                   })
                 );
               }else{
-                return res.status(500).send(
-                  JSON.stringify({
-                    msg: "ok."
-                  })
+                let connection = dbSetup.connect();
+                connection.query(
+                  "DELETE FROM cart WHERE customer_id=?",
+                  addressInfo.customer_id,
+                  function(error, results, fields) {
+                    if (error) {
+                      console.log(error.sqlMessage);
+                      return res.status(500).send(
+                        JSON.stringify({
+                          data: "Something went wrong while while deleting item from cart."
+                        })
+                      );
+                    } else {
+                      return res.status(200).send(
+                        JSON.stringify({
+                          msg: " Order is placed and cart is successful cleared."
+                        })
+                      );
+                    }
+                  }
                 );
+                connection.end();
               }
             })
             connection.end()
@@ -88,22 +104,3 @@ const placeOrderHandler = async function(req, res) {
 };
 
 module.exports = placeOrderHandler;
-
-
-// fetch('/api/create_order', {
-//   method: 'post',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify({
-//     customerId: customer_id,
-//     token: sessionContext.token,
-//     productInfoList: productInfoList
-//   })
-// }).then(response => {
-//   if (response.ok) {
-//     response.json().then(json => {
-//       messageContext.setSuccessMessages(json.msg)
-//     })
-//   } else {
-//     console.log('something wrong during getting product details');
-//   }
-// });
