@@ -22,37 +22,39 @@ class BookMarkedItems extends Component {
     this.noBookMarkedItems = false
     this.isUpdate = false;
     this.isDelete = false;
+    this.newState = [];
   }
 
   removeBookmark(event){
     event.preventDefault();
-    // let user = { token: 'true', customerId: this.props.sessionContext.user.id }
-    // let productId = this.state.data[event.target.value]
-    // fetch('/api/delete_bookmark_item', {
-    //   method: "delete",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     user: user,
-    //     productId: productId
-    //   })
-    // }).then(response => {
-    //   if (response.ok) {
-    //     response.json().then(json => {
-    //       this.props.messageContext.setSuccessMessages(json.msg),
-    //       this.isDelete = true;
-    //     });
-    //   } else {
-    //     response.json().then(json =>
-    //       console.log(json.msg)
-    //     //  this.setErrorMessages(json.msg)
-    //     );
-    //   }
-    // });
-    // if(this.isDelete === true){
-    //   let newState = this.state.data.splice(event.target.value, 1);
-    //   this.setState({data: newState});
-    //   this.isDelete = false;
-    // }
+    this.newState = this.tempState;
+    this.newState.splice(event.target.value, 1);
+    let user = { token: 'true', customerId: this.props.sessionContext.user.id }
+    let productId = event.target.name
+    fetch('/api/delete_bookmark_item', {
+      method: "delete",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user: user,
+        productId: productId
+      })
+    }).then(response => {
+      if (response.ok) {
+        response.json().then(json => {
+          this.props.messageContext.setSuccessMessages(json.msg);
+          setTimeout(() => {
+            this.props.messageContext.clearMessages()
+          }, 1500);
+          this.tempState = this.newState;
+          this.isUpdate = false;
+        });
+      } else {
+        response.json().then(json =>
+          console.log(json.msg)
+        //  this.setErrorMessages(json.msg)
+        );
+      }
+    });
   }
 
   componentDidUpdate(){
@@ -72,7 +74,7 @@ class BookMarkedItems extends Component {
     }).then(response => {
       if (response.ok) {
         response.json().then(json => {
-          // if(json.data.length === 0) this.noBookMarkedItems =true;
+          // console.log(json.data)
           this.tempState= json.data;
           this.setState({ data: json.data })
         });
@@ -89,8 +91,9 @@ class BookMarkedItems extends Component {
     // if(this.isUpdate ){
       if(this.state.data.length > 0){
         return (
+          <div>
+          <Messages messages={this.props.messageContext.messages} />
           <div className="bookmarked-item-content">
-           <Messages messages={this.props.messageContext.messages} />
             <div className="title"><h1>BookMarked</h1></div>
             <div className="bookmarked-item">
                 <div></div>
@@ -105,7 +108,7 @@ class BookMarkedItems extends Component {
                   <div>{element.p_name}</div>
                   <div>{`$${element.unit_price}`}</div>
                   <div className="text-right">
-                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeBookmark.bind(this)} >
+                    <button type="button" className="btn btn-danger" name={element.product_id} value={i} onClick={this.removeBookmark.bind(this)} >
                       <i className="fas fa-trash-alt"></i> Remove
                     </button>
                   </div>
@@ -113,11 +116,14 @@ class BookMarkedItems extends Component {
                 )
               })}
           </div>
+          </div>
         );
       // }
     }else {
       return(
-        <div>loading</div>
+        <div>
+          <h1>Cart is empty</h1>
+        </div>
       )
     }
   }
