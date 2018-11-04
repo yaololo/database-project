@@ -7,6 +7,7 @@ import {
 } from "../../../context_helper"
 import { ProviderContext, subscribe } from "react-contextual";
 import './BookmarkedItems.css';
+import './HistoricalOrders.css';
 class HistoricalOrders extends Component {
    static propTypes = {
     ...sessionContextPropType,
@@ -40,8 +41,6 @@ class HistoricalOrders extends Component {
     }).then(response => {
       if (response.ok) {
         response.json().then(json => {
-          // if(json.data.length === 0) this.noBookMarkedItems =true;
-          console.log(json.data)
           this.tempState= json.data;
           this.setState({ data: json.data })
         });
@@ -58,24 +57,37 @@ class HistoricalOrders extends Component {
     // if(this.isUpdate ){
       if(this.state.data.length > 0){
         return (
-          <div className="bookmarked-item-content">
+          <div className="history-order-content">
             <div className="title"><h1>Order History</h1></div>
-            <div className="order-item">
-                <div>Product Name</div>
-                <div className="order-history-quantity" >Quantity </div>
-            </div>
-              {this.state.data[0].map((element, i) => {
+              {this.state.data.map((obj, i) => {
+                let orderId = obj.id;
+                let subTotal =0;
                 return(
-                <div key={i} className="order-item">
-                  {/* <div><img src={element.image.split(',')[0]} alt=""/></div> */}
-                  <div>{element.p_name}</div>
-                  <div className="order-history-quantity">{element.TOTAL}</div>
-                  {/* <div className="text-right">
-                    <button type="button" className="btn btn-danger" value={i} onClick={this.removeBookmark.bind(this)} >
-                      <i className="fas fa-trash-alt"></i> Remove
-                    </button>
-                  </div> */}
-                </div>
+                  <div key={i} className="historical-order-card">
+                    <div className="historical-order-item">
+                      <div className="text-center">Order ID</div>
+                      <div>Placed On</div>
+                      <div></div>
+                      <div>Product Name</div>
+                      <div>Unit Price</div>
+                      <div className="order-history-quantity" >Quantity </div>
+                    </div>
+                      {obj.details.map((element, idx) => {
+                        let date = element.orderDate.substring(0, 10);
+                        subTotal= Number(subTotal) + Number(element.Price)*Number(element.quantity).toFixed(2);
+                        return(
+                          <div key={idx} className="historical-order-item">
+                            <div className="text-center">{orderId}</div>
+                            <div>{date}</div>
+                            <div><img src={element.image.split(',')[0]} alt=""/></div>
+                            <div>{element.name}</div>
+                            <div>{`$${element.Price}`}</div>
+                            <div className="order-history-quantity">{element.quantity}</div>
+                          </div>
+                        )
+                      })}
+                       <div className="historical-order-subtotal"><span><h4>Subtotal: {`$${subTotal}`}</h4></span></div>
+                  </div>
                 )
               })}
           </div>
