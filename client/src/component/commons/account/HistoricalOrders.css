@@ -1,0 +1,35 @@
+.order-history-quantity{
+  margin: 0 auto;
+}
+
+.historical-order-item{
+  /* max-width: 40vw; */
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 10% 10% 8% auto 8% 8%;
+  grid-column-gap: 40px;
+  background-color: #fff
+}
+
+/* .historical-order-item-sub{
+  display: grid;
+  grid-template-columns: 10% 15% 8% auto 8% 8%;
+  background-color: #fff
+} */
+
+.historical-order-card{
+  margin-bottom: 5em;
+  padding-bottom: 2em;
+  background-color: #fff
+}
+
+.history-order-content{
+  max-width: 60vw;
+  margin-bottom: 1em;
+  margin-left: 10vw;
+  /* margin: 0 auto; */
+}
+
+.historical-order-subtotal{
+  padding-left:10px;
+}
