@@ -5,6 +5,8 @@ import { withRouter } from "react-router";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper";
+import SideBar from '../../SideBar/SideBar';
+
 class Header extends React.Component {
   static propTypes = {
     history: object.isRequired,
@@ -17,13 +19,6 @@ class Header extends React.Component {
     const active = { borderBottomColor: "#3f51b5" };
     const loginNav = this.props.sessionContext.token ? (
       <div>
-        <ul className="nav navbar-nav navbar-left">
-          <li>
-            <NavLink exact to="/" activeStyle={active}>
-              Home Page
-            </NavLink>
-          </li>
-        </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="nav-item">
             <Link to="/my_cart" >
@@ -57,7 +52,6 @@ class Header extends React.Component {
       </div>
     ) : (
       <ul className="nav navbar-nav navbar-right">
-
         <li data-cy="login">
           <NavLink to="/login" activeStyle={active}>
             Log in
@@ -73,25 +67,20 @@ class Header extends React.Component {
     return (
       <nav className="navbar navbar-inverse navbar-static-top">
         <div className="container">
+          <div className="nav-bar-div">
           <div className="navbar-header">
-            <button
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbar"
-              className="navbar-toggle collapsed"
-            >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </button>
             <NavLink exact to="/" className="navbar-brand">
               <em></em>Online Store
             </NavLink>
           </div>
+          <div className="search-bar">
+              <SideBar/>
+          </div>
+          <div></div>
           <div id="navbar" className="navbar-collapse collapse">
             {loginNav}
           </div>
+        </div>
         </div>
       </nav>
     );
