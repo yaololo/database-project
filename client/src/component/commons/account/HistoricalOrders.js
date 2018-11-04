@@ -95,7 +95,7 @@ class HistoricalOrders extends Component {
       // }
     }else {
       return(
-        <div>loading</div>
+        <div><h1>You have not place any order yet</h1></div>
       )
     }
   }

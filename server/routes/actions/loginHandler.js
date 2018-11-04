@@ -2,7 +2,7 @@ const dbSetup = require('../../DbConnection/setupConnection');
 
 const loginHandler = async function(req, res) {
   try {
-    
+
     let user ={
       email: req.body.user.email,
       password: req.body.user.password.toString(),
@@ -37,7 +37,7 @@ const loginHandler = async function(req, res) {
         user.id = results[0].user_id;
 
         // let connection = dbSetup.connect();
-        
+
         connection.query('SELECT product_id, quantity FROM cart WHERE customer_id = ? GROUP BY product_id', user.id,
         function(error, results, fields) {
           if(error){
@@ -60,7 +60,6 @@ const loginHandler = async function(req, res) {
                 })
               )
             }
-            
 
             let productList = results;
 
