@@ -23,6 +23,7 @@ import {
 import { ProviderContext, subscribe } from "react-contextual";
 
 import Admin from './component/Admin/Admin'
+import SearchView from './component/SearchView/SearchView';
 
 class MyApp extends Component {
   static propTypes = {
@@ -66,7 +67,7 @@ class MyApp extends Component {
     <Route
       {...rest}
       render={props =>
-        this.isAuthenticated ? (
+        this.props.sessionContext.token ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -87,13 +88,14 @@ class MyApp extends Component {
         <Switch>
           <Route path="/" exact render={() => <Home data={this.state.data} />} />
           <Route path="/confirm_checkout" exact component= {CheckOutConfirmation} />
+          <this.PrivateRoute path="/my_cart" exact component={ShoppingCart} />
           <this.PrivateRoute path="/account" component={Profile} />
           <this.PrivateRoute path="/checkout/address" component={Address} />
           <this.PrivateRoute path="/checkout/confirm_checkout" component={CheckOutConfirmation} />
+          <Route path="/search_product" exact component={SearchView} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component= {SignUp} />
           <Route path="/product/:productId" exact component={DetailedPage} />
-          <this.PrivateRoute path="/my_cart" exact component={ShoppingCart} />
           <Route path="*" component={NotFound} />
         </Switch>
         <Footer />
