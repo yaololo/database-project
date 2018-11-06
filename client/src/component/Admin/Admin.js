@@ -6,7 +6,8 @@ import {
   mapMessageContextToProps,
   messageContextPropType,
 } from "../../context_helper"
-
+import AdminContent from './AdminContent';
+import './Admin.css'
 class Admin extends Component {
 
   static propTypes = {
@@ -23,21 +24,21 @@ class Admin extends Component {
 
   componentToggler(event){
     event.preventDefault();
-    this.setState({ component : event.target.value })
+    this.setState({ component : event.target.name })
   }
 
   render() {
     return (
       <div>
-        <div className="customer-panel">
+        <div className="admin-panel">
          <div className="list-group" >
-            <a className="list-group-item" name="bookmarks" onClick={this.componentToggler.bind(this)}> Sales</a>
-            <a className="list-group-item" name="orders" onClick={this.componentToggler.bind(this)}>User Activities</a>
-            <a className="list-group-item" name="account" onClick={this.componentToggler.bind(this)}>Items Sold</a>
+            <a className="list-group-item" name="sales-report" onClick={this.componentToggler.bind(this)}> Sales</a>
+            <a className="list-group-item" name="active-user" onClick={this.componentToggler.bind(this)}>User Activities</a>
+            <a className="list-group-item" name="product-sales" onClick={this.componentToggler.bind(this)}>Items Sold</a>
          </div>
           <div>
             <div className="customer-panel-content">
-              something
+              <AdminContent component={this.state.component} />
             </div>
           </div>
         </div>
