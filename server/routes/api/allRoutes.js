@@ -6,6 +6,7 @@ const handleAsyncError = require("express-async-wrap");
 const deleteItemsOnCheckout = require("../actions/deleteItemsOnCheckout");
 const selectByCategory = require("../actions/selectByCategory");
 const cartDetailsHandler = require('../actions/cartDetailsHandler')
+const searchByPriceHandler = require('../actions/searchByPriceHandler')
 const router = require('express').Router();
 
 router.get('/hot_items', handleAsyncError(onLandingAction));
@@ -18,6 +19,7 @@ router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
 
 router.post('/place_order', handleAsyncError(placeOrderHandler))
 
+router.post('/search_by_price', handleAsyncError(searchByPriceHandler))
 
 
 

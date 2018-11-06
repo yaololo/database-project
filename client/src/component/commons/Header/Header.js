@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import { object, instanceOf } from "prop-types";
 import { ProviderContext, subscribe } from "react-contextual";
 import { mapSessionContextToProps, sessionContextPropType, sessionCartInfoPropType, mapItemsToCart } from "../../../context_helper";
+// import SideBar from '../../SideBar/SideBar';
 import SideBar from '../../SideBar/SideBar';
 
 class Header extends React.Component {
