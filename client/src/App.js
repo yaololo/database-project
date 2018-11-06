@@ -2,7 +2,7 @@
 import './App.css';
 
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-contextual";
 import React, { Component } from 'react';
 import { CookiesProvider } from "react-cookie";
