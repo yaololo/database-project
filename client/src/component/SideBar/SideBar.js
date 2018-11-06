@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import './Sidebar.css'
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-];
+import { ProviderContext, subscribe } from "react-contextual";
+import { withRouter } from "react-router";
 
+import {
+  mapSessionContextToProps,
+  sessionContextPropType,
+  sessionCartInfoPropType,
+  mapItemsToCart,
+  mapMessageContextToProps,
+  messageContextPropType,
+} from "../../context_helper"
+
+const options = [
+  { value: '3', label: 'Clothing' },
+  { value: '4', label: 'Sports' },
+  { value: '5', label: 'Music' },
+  { value: '6', label: 'Furniture' },
+  { value: '9', label: 'Bags' },
+  { value: '10', label: 'Logo' }
+];
 
 const groupStyles = {
   display: 'flex',
@@ -34,6 +48,13 @@ const formatGroupLabel = data => (
 );
 
 class SideBar extends Component {
+  static propTypes = {
+    // history: object.isRequired,
+    // cookies: instanceOf(Cookies).isRequired,
+    ...sessionContextPropType,
+    ...sessionCartInfoPropType,
+    ...messageContextPropType
+  };
 
   constructor(){
     super();
@@ -42,11 +63,35 @@ class SideBar extends Component {
     }
   }
 
-
+  onClickHandler = (e) => {
+    fetch('/api/search_by_price', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        categories: this.state.selectedOption,
+        orderBy: e.target.name
+      })
+    }).then(response => {
+      if (response.ok) {
+        response.json().then(json => {
+          this.props.history.push({
+            pathname:`/search_product`,
+            state:{
+              data: json.data
+             }
+           });
+        })
+      } else {
+        response.json().then(json => {
+          console.log(json.msg)
+        })
+      }
+    });
+  }
 
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    // console.log(`Option selected:`, selectedOption);
   }
 
   render() {
@@ -74,12 +119,12 @@ class SideBar extends Component {
                 <i className="caret" />
               </li>
               <ul className="dropdown-menu">
-                <li>
-                  <a>Lowest to Highest price</a>
+                <li onClick={this.onClickHandler.bind(this)}>
+                  <a name="ASC" >Lowest to Highest price</a>
                 </li>
                 <li className="divider" />
-                <li>
-                  <a >
+                <li  onClick={this.onClickHandler.bind(this)}>
+                  <a name="DESC">
                     Highest to Highest price
                   </a>
                 </li>
@@ -91,4 +136,14 @@ class SideBar extends Component {
   }
 }
 
-export default SideBar;
+const mapContextToProps = context => {
+  return {
+    ...mapSessionContextToProps(context),
+    ...mapItemsToCart(context),
+    ...mapMessageContextToProps(context)
+  };
+};
+
+export default subscribe(ProviderContext, mapContextToProps)(
+  withRouter(SideBar)
+);
