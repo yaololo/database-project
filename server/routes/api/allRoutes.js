@@ -1,3 +1,4 @@
+const yearlyMonthlySaleReport= require('../actions/yearlyMonthlySaleReport');
 const placeOrderHandler= require('../actions/placeOrderHandler');
 const loginHandler = require('../actions/loginHandler');
 const signUpHandler = require('../actions/signUpHandler');
@@ -20,6 +21,10 @@ router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
 router.post('/place_order', handleAsyncError(placeOrderHandler))
 
 router.post('/search_by_price', handleAsyncError(searchByPriceHandler))
+
+router.post('/sale_report_month_year', handleAsyncError(yearlyMonthlySaleReport))
+
+router.post('/sale_report_daily', handleAsyncError(searchByPriceHandler))
 
 
 

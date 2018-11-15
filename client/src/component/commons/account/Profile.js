@@ -23,9 +23,8 @@ class Profile extends Component {
   }
 
   componentToggler(event){
-
     event.preventDefault();
-    this.setState({ component : event.target.value })
+    this.setState({ component : event.target.name })
   }
 
   render() {
@@ -33,9 +32,9 @@ class Profile extends Component {
       <div>
         <div className="customer-panel">
          <div className="list-group" >
-            <button className="list-group-item" value="bookmarks" onClick={this.componentToggler.bind(this)}> My bookmarked Items</button>
-            <button className="list-group-item" value="orders" onClick={this.componentToggler.bind(this)}>All orders</button>
-            <button className="list-group-item" value="account" onClick={this.componentToggler.bind(this)}>Account manage</button>
+            <a className="list-group-item" name="bookmarks" onClick={this.componentToggler.bind(this)}> My bookmarked Items</a>
+            <a className="list-group-item" name="orders" onClick={this.componentToggler.bind(this)}>All orders</a>
+            <a className="list-group-item" name="account" onClick={this.componentToggler.bind(this)}>Account manage</a>
          </div>
           <div>
             <div className="customer-panel-content">

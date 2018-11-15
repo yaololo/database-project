@@ -12,3 +12,7 @@
   left:0;
   right:0;
  }
+
+ .list-group-item{
+  cursor: pointer;
+ }

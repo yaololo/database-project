@@ -1,0 +1,68 @@
+.admin-panel{
+  display: grid;
+  grid-template-columns: 15% auto;
+}
+
+.list-group {
+  min-height: 100vh;
+  background-color: #fff;
+ }
+ .lead {
+  left:0;
+  right:0;
+ }
+
+ .list-group-item{
+  cursor: pointer;
+ }
+
+ .navbar{
+   background-color: rgb(209, 209, 209)
+ }
+
+ .admin-nav-layout{
+   display: grid;
+   grid-template-columns: 30% 30% auto;
+   grid-column-gap: 10px;
+ }
+
+ .admin-nav-div{
+   padding-top: 10px;
+   display: grid;
+   grid-template-columns: 25% auto;
+ }
+ .generate-report{
+   padding-left: 20px;
+   padding-bottom: 10px;
+ }
+
+ .report-title{
+   font-size: 1em;
+   padding-left: 10px;
+   /* max-width: 30px; */
+ }
+
+.report-type{
+  background-color: #fff;
+  border: 1px grey solid;
+  margin-left: 2px;
+  color:black;
+  min-width: 50px;
+  /* max-width: 30px; */
+}
+
+.report-type a{
+  text-decoration: none;
+  /* max-width: 30px; */
+}
+
+.report-charts{
+  padding-top: 10vh;
+  margin: 0 auto;
+  padding-left: 8vw;
+  /* background-color: #fff; */
+}
+
+.error{
+  background-color: pink;
+}

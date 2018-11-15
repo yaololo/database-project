@@ -55,6 +55,8 @@ const custOrderHist = async function(req, res) {
         orders.sort(function(a, b) {
           return Number(b.id) - Number(a.id);
         });
+
+
         return res.status(200).send(
           JSON.stringify({
             data: orders

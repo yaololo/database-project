@@ -82,27 +82,30 @@ class MyApp extends Component {
   );
 
   render() {
-    return this.props.sessionContext.user.userType !== 'admin' ?(
-      <div>
-        <Header />
-        <Switch>
-          <Route path="/" exact render={() => <Home data={this.state.data} />} />
-          <Route path="/confirm_checkout" exact component= {CheckOutConfirmation} />
-          <this.PrivateRoute path="/my_cart" exact component={ShoppingCart} />
-          <this.PrivateRoute path="/account" component={Profile} />
-          <this.PrivateRoute path="/checkout/address" component={Address} />
-          <this.PrivateRoute path="/checkout/confirm_checkout" component={CheckOutConfirmation} />
-          <Route path="/search_product" exact component={SearchView} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component= {SignUp} />
-          <Route path="/product/:productId" exact component={DetailedPage} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-        <Footer />
-      </div>
-    ): (
+    return (
       <Admin/>
     )
+    // return this.props.sessionContext.user.userType !== 'admin' ?(
+    //   <div>
+    //     <Header />
+    //     <Switch>
+    //       <Route path="/" exact render={() => <Home data={this.state.data} />} />
+    //       <Route path="/confirm_checkout" exact component= {CheckOutConfirmation} />
+    //       <this.PrivateRoute path="/my_cart" exact component={ShoppingCart} />
+    //       <this.PrivateRoute path="/account" component={Profile} />
+    //       <this.PrivateRoute path="/checkout/address" component={Address} />
+    //       <this.PrivateRoute path="/checkout/confirm_checkout" component={CheckOutConfirmation} />
+    //       <Route path="/search_product" exact component={SearchView} />
+    //       <Route path="/login" exact component={Login} />
+    //       <Route path="/signup" exact component= {SignUp} />
+    //       <Route path="/product/:productId" exact component={DetailedPage} />
+    //       <Route path="*" component={NotFound} />
+    //     </Switch>
+    //     <Footer />
+    //   </div>
+    // ): (
+    //   <Admin/>
+    // )
   }
 }
 const mapContextToProps = context => {
