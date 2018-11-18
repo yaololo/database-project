@@ -74,7 +74,7 @@ class HistoricalOrders extends Component {
                     </div>
                       {obj.details.map((element, idx) => {
                         let date = element.orderDate.substring(0, 10);
-                        subTotal= Number(subTotal) + Number(element.Price)*Number(element.quantity).toFixed(2);
+                        subTotal= subTotal + Number(element.Price)*Number(element.quantity).toFixed(2);
                         return(
                           <div key={idx} className="historical-order-item">
                             <div className="text-center">{orderId}</div>

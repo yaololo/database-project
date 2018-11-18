@@ -9,6 +9,7 @@ class YearlyDatePicker extends Component {
       className: ''
      }
   }
+
   inputValidation(e){
     if(e.target.value.length <= 4){
       this.setState({

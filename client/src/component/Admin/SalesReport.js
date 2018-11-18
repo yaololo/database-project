@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import BarChartReport from './Charts/BarChartReport';
 import DatePicker from './DatePicker';
+import CompareLineChart from './Charts/CompareLineChart';
 class SalesReport extends Component {
   constructor(props) {
     super(props);
@@ -9,29 +10,55 @@ class SalesReport extends Component {
       startDate: new Date().getFullYear(),
       endDate: new Date().getFullYear(),
       datePickerType: 'Yearly',
-      customizeData: [],
+      monthlyData: [],
       submitButtonClass: '',
+      comparedData: [],
+      renderCompares: false
     };
-    this.yearRange = 0;
+    this.yearRange = [];
+
   }
 
   changeReportType(e){
     e.preventDefault();
+    this.yearRange = [];
     this.setState({
       datePickerType: e.target.name,
       startDate: new Date().getFullYear(),
       endDate: new Date().getFullYear(),
+      monthlyData: [],
+      comparedData: [],
+      renderCompares: false
     })
+  }
 
+  generateCmoparedReport(e){
+    e.preventDefault();
+    this.setState({
+      renderCompares: true
+    })
   }
 
   generateReport(e){
 
+    if(this.state.datePickerType !== 'Yearly'){
+      this.setState({
+        renderCompares: false
+      })
+    }
     let startDate = "";
     let endDate = "";
     if(this.state.datePickerType === "Yearly"){
       startDate = `${this.state.startDate}-01-01`
       endDate = `${this.state.endDate}-12-31`
+
+      let startYear = startDate.split("-")[0];
+      let endYear = endDate.split("-")[0];
+
+      this.yearRange = []
+      for(let i = Number(startYear); i <= Number(endYear); i++){
+        this.yearRange.push(i);
+      }
     } else if(this.state.datePickerType === "Monthly") {
       startDate = `${this.state.startDate}-01-01`
       endDate = `${this.state.startDate}-12-31`
@@ -54,7 +81,7 @@ class SalesReport extends Component {
     }).then(response => {
       if (response.ok) {
         response.json().then(json => {
-          this.setState({ monthlyData: json.data })
+          this.setState({ monthlyData: json.data, comparedData: json.comparedData })
         })
       } else {
         response.json().then(json => {
@@ -63,7 +90,6 @@ class SalesReport extends Component {
       }
     });
   }
-
 
   startDateChangeHandler(e) {
     this.setState({
@@ -110,6 +136,7 @@ class SalesReport extends Component {
     }
   }
 
+
   renderEndDate(type){
     if(type !== 'Monthly'){
       return(
@@ -128,7 +155,7 @@ class SalesReport extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-static-top">
+        <nav className="customised-navbar navbar-static-top">
             <div className="admin-nav-div">
               <div className="report-title">
               Report type:
@@ -184,14 +211,21 @@ class SalesReport extends Component {
         </nav>
         <div className="report-charts">
           <div className="report-charts">
-            <BarChartReport data={this.state.monthlyData} type={this.state.datePickerType} range={this.yearRange}/>
+            {this.state.monthlyData.length > 0 && this.yearRange !== [] ? (
+            <div><BarChartReport data={this.state.monthlyData}
+            type={this.state.datePickerType} range={this.yearRange}/>
+            {this.state.datePickerType === 'Yearly'?  <div className ="compare-btn"><button className="btn btn-primary" onClick={this.generateCmoparedReport.bind(this)}>
+             Compare Details</button></div> : null}
+             <div>
+               {this.state.renderCompares? <CompareLineChart  data={this.state.comparedData}
+                type={this.state.datePickerType} range={this.yearRange} /> : null}
+             </div>
+            </div>) : null}
           </div>
         </div>
       </div>
     );
   }
-
-
 }
 
 export default SalesReport;

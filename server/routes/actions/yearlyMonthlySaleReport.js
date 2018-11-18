@@ -5,8 +5,7 @@ const yearlyMonthlySaleReport = async function(req, res) {
     let startDate = req.body.startDate
     let endDate = req.body.endDate
     let reportType = req.body.reportType;
-    console.log(startDate)
-    console.log(endDate)
+
     var connection = dbSetup.connect();
 
     let sql = "SELECT  YEAR(o.order_date) AS `Year`," +
@@ -32,21 +31,22 @@ const yearlyMonthlySaleReport = async function(req, res) {
         );
       } else {
 
-        console.log(results)
         let data = [];
+        let comparedData = []
 
         if(reportType === "Yearly"){
+          comparedData= yearlyCompare(results);
           data = yearlyReportMapper(results);
         } else if(reportType === "Monthly"){
           data = monthlyReportMapper(results);
-          console.log(data)
         } else{
           data=customizeReportMapper(results);
         }
 
         return res.status(200).send(
           JSON.stringify({
-            data: data
+            data: data,
+            comparedData: comparedData
           })
         );
       }
@@ -81,16 +81,16 @@ const yearlyReportMapper= (results) => {
 const monthlyReportMapper= (results) => {
   let month= {
     January: 0 ,
-     February: 0 ,
-     Mar:0 ,
-     April: 0 ,
-     May: 0 ,
-     June: 0 ,
-     July: 0 ,
-     August: 0 ,
-     September: 0 ,
-     October: 0 ,
-     November: 0 ,
+    February: 0 ,
+    March:0 ,
+    April: 0 ,
+    May: 0 ,
+    June: 0 ,
+    July: 0 ,
+    August: 0 ,
+    September: 0 ,
+    October: 0 ,
+    November: 0 ,
     December: 0
 }
   let map = {};
@@ -100,7 +100,10 @@ const monthlyReportMapper= (results) => {
     map[element.Month] = Number(element["Sales Amount"])
   });
 
+
   const mapped = Object.assign(month, map)
+
+
   for (let key in mapped) {
     let temp = {};
     if(key.length > 4){
@@ -110,8 +113,8 @@ const monthlyReportMapper= (results) => {
     }
     temp.sales = mapped[key];
     data.push(temp);
-
   }
+
   return data
 }
 
@@ -121,7 +124,6 @@ const customizeReportMapper= (results) => {
   let count =0
   results.forEach(element => {
     count +=1;
-    console.log(count)
     let tempName = '';
     if(element.Month.length > 4){
       tempName = element.Month.substring(0, 3);
@@ -141,7 +143,6 @@ const customizeReportMapper= (results) => {
       map[tempName].push(temp);
     }
   });
-  console.log(map)
 
   for (let key in map) {
     let mapped = {}
@@ -151,7 +152,110 @@ const customizeReportMapper= (results) => {
     })
     data.push(mapped);
   }
-  console.log(data)
+
+  data.sort(function (a, b) {
+    a.value = sortingHelper(a.name);
+    b.value = sortingHelper(b.name);
+    return a.value - b.value;
+  })
+
+  return data
+}
+
+const sortingHelper= (string) => {
+  let result ;
+  switch(string) {
+    case 'Jan':
+        result = 1;
+        break;
+    case 'Feb':
+        result = 2;
+        break;
+    case 'Mar':
+        result = 3;
+        break;
+    case 'Apr':
+        result = 4;
+        break;
+    case 'May':
+        result = 5;
+        break;
+    case 'June':
+        result = 6;
+        break;
+    case 'July':
+        result = 7;
+        break;
+    case 'Aug':
+        result = 8;
+        break;
+    case 'Sep':
+        result = 9;
+        break;
+    case 'Oct':
+        result = 10;
+        break;
+    case 'Nov':
+        result = 11;
+        break;
+    case 'Dec':
+        result = 12;
+        break;
+    default:
+        result = 0;
+  }
+  return result;
+}
+
+const yearlyCompare = (results) => {
+  let month= {
+    January: 0 ,
+    February: 0 ,
+    March:0 ,
+    April: 0 ,
+    May: 0 ,
+    June: 0 ,
+    July: 0 ,
+    August: 0 ,
+    September: 0 ,
+    October: 0 ,
+    November: 0 ,
+    December: 0
+  }
+  let map = {};
+  let data = [];
+
+  results.forEach(element => {
+    if (map[element.Month] === undefined) {
+      map[element.Month] = [];
+      let temp = {};
+      temp[element.Year] = Number(element["Sales Amount"])
+      map[element.Month].push(temp);
+
+    } else {
+      let temp = {};
+      temp[element.Year] = Number(element["Sales Amount"])
+      map[element.Month].push(temp);
+    }
+  })
+
+  const mapped = Object.assign(month, map)
+
+  for (let key in mapped) {
+    let mapper = {}
+    if(key.length > 4){
+      mapper.name = key.substring(0, 3);
+    }else {
+      mapper.name = key;
+    }
+    if(mapped[key] !== 0){
+      mapped[key].forEach(element => {
+        mapper[Object.keys(element)] = Object.values(element)[0];
+      })
+    }
+    data.push(mapper);
+  }
+
   return data
 }
 

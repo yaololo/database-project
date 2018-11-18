@@ -10,93 +10,6 @@ const cartDetailsHandler = require('../actions/cartDetailsHandler')
 const searchByPriceHandler = require('../actions/searchByPriceHandler')
 const router = require('express').Router();
 
-router.get('/hot_items', handleAsyncError(onLandingAction));
-
-router.post('/user/signup', handleAsyncError(signUpHandler));
-
-router.post('/user/login', handleAsyncError(loginHandler));
-
-router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
-
-router.post('/place_order', handleAsyncError(placeOrderHandler))
-
-router.post('/search_by_price', handleAsyncError(searchByPriceHandler))
-
-router.post('/sale_report_month_year', handleAsyncError(yearlyMonthlySaleReport))
-
-router.post('/sale_report_daily', handleAsyncError(searchByPriceHandler))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const addToCart = require("../actions/addToCart");
 const bookMarkItem = require("../actions/bookMarkItem");
 const deleteBookMarkItem = require("../actions/deleteBookMarkItem");
@@ -113,6 +26,21 @@ const viewFeedbackByAUser = require("../actions/viewFeedbackByAUser");
 const viewFeedbackOfAProduct = require("../actions/viewFeedbackOfAProduct");
 const cancelOrder = require("../actions/cancelOrder");
 const updateProfileInfo = require("../actions/updateProfileInfo");
+
+
+router.get('/hot_items', handleAsyncError(onLandingAction));
+
+router.post('/user/signup', handleAsyncError(signUpHandler));
+
+router.post('/user/login', handleAsyncError(loginHandler));
+
+router.post('/my_cart_details', handleAsyncError(cartDetailsHandler));
+
+router.post('/place_order', handleAsyncError(placeOrderHandler))
+
+router.post('/search_by_price', handleAsyncError(searchByPriceHandler))
+
+router.post('/sale_report_month_year', handleAsyncError(yearlyMonthlySaleReport))
 
 router.delete('/delete_cart_on_checkout', deleteItemsOnCheckout);
 

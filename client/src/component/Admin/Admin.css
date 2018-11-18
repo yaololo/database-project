@@ -7,6 +7,7 @@
   min-height: 100vh;
   background-color: #fff;
  }
+
  .lead {
   left:0;
   right:0;
@@ -16,7 +17,7 @@
   cursor: pointer;
  }
 
- .navbar{
+ .customised-navbar{
    background-color: rgb(209, 209, 209)
  }
 
@@ -32,11 +33,13 @@
    grid-template-columns: 25% auto;
  }
  .generate-report{
+   padding-top: 5px;
    padding-left: 20px;
    padding-bottom: 10px;
  }
 
  .report-title{
+   padding-top: 8px;
    font-size: 1em;
    padding-left: 10px;
    /* max-width: 30px; */
@@ -65,4 +68,8 @@
 
 .error{
   background-color: pink;
+}
+
+.compare-btn{
+  padding-left: 18vw;
 }
